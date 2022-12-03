@@ -1,0 +1,38 @@
+{
+	"alpha": {
+		"version_name": "1.0",
+		"version_code": "1",
+		"min_version_code": "1",
+		"update_url": "https://github.com/AtsumeruDev/AtsumeruManager/releases",
+		"changelog_en": [
+			"- First version"
+		],
+		"changelog_ru": [
+			"- Первая версия"
+		]
+	},
+	"beta": {
+		"version_name": "1.0",
+		"version_code": "1",
+		"min_version_code": "1",
+		"update_url": "https://github.com/AtsumeruDev/AtsumeruManager/releases",
+		"changelog_en": [
+			"- First version"
+		],
+		"changelog_ru": [
+			"- Первая версия"
+		]
+	},
+	"release": {
+		"version_name": "1.0",
+		"version_code": "1",
+		"min_version_code": "1",
+		"update_url": "https://github.com/AtsumeruDev/AtsumeruManager/releases",
+		"changelog_en": [
+			"- First version"
+		],
+		"changelog_ru": [
+			"- Первая версия"
+		]
+	}
+}
