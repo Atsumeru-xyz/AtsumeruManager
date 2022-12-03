@@ -15,7 +15,7 @@ Then just launch file as normall app
 ### Linux
 Execute comand from terminal:
 ```bash
-./AtsumeruManager-vx.y.z
+./AtsumeruManager_linux_vx.y.z
 ```
 or mark file as executable and launch it as normal app
 
