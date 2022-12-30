@@ -113,6 +113,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.3.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
 
+    // AtsumeruAPI
+    implementation 'com.github.AtsumeruDev:Atsumeru-API:1990e1b059'
+
     // JavaFX
     implementation 'com.jfoenix:jfoenix:9.0.10'
     implementation 'org.controlsfx:controlsfx:9.0.0'
