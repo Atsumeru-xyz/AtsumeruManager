@@ -3,7 +3,7 @@
 `Standalone app` (**Windows**/**Linux**/**MacOS**) and `WebUI` for [Atsumeru](https://github.com/AtsumeruDev/Atsumeru) self-hosted manga/comics/light novels server managing and content reading
 
 <p align="center">
-  <img width="625" height="399" src="https://raw.githubusercontent.com/AtsumeruDev/AtsumeruManager/main/atsumeru_manager_app.png">
+  <img width="625" src="https://raw.githubusercontent.com/AtsumeruDev/AtsumeruManager/main/atsumeru_manager_app.png">
 </p>
 
 ## Release types
