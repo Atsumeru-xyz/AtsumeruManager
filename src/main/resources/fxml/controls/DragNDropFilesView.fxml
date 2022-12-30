@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<fx:root fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="containerNodes" alignment="CENTER" styleClass="upload-box" VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="6.0" />
+        </padding>
+        <MaterialDesignIconView fx:id="mdivIcon" glyphName="CLOUD_UPLOAD" glyphStyle="-fx-fill: #ecf0f1;" size="100px" />
+        <ProgressBar fx:id="pbUploading" prefHeight="4.0" prefWidth="200.0" progress="0.0">
+            <VBox.margin>
+                <Insets bottom="2.0" />
+            </VBox.margin>
+        </ProgressBar>
+        <Label fx:id="lblFilesToUpload" text="%gui.drag_n_drop_select_files" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblLog" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Uploading: 1/10" textFill="WHITE" visible="false" wrapText="true" />
+    </VBox>
+</fx:root>

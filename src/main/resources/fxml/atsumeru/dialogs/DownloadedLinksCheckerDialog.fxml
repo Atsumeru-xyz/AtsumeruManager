@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<StackPane style="-fx-background-color: #2D2D2D;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.DownloadedLinksCheckerDialogController">
+    <BorderPane prefWidth="600.0">
+        <center>
+            <VBox alignment="CENTER" style="-fx-background-color: #2D2D2D;" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <children>
+               <VBox fx:id="vbCheckLinks" VBox.vgrow="ALWAYS">
+                  <children>
+                          <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                              <children>
+                                  <FontAwesomeIconView glyphName="LINK" glyphStyle="-fx-fill: #ecf0f1;" size="20">
+                                      <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                      </HBox.margin>
+                                  </FontAwesomeIconView>
+                                  <Label text="%gui.dialog.links_to_check" textFill="#ecf0f1" HBox.hgrow="ALWAYS">
+                                      <font>
+                                          <Font size="14.0" />
+                                      </font>
+                                  </Label>
+                              </children>
+                          </HBox>
+                     <JFXTextArea fx:id="taLinks" focusColor="transparent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" promptText="%gui.metadata_links" styleClass="text-area-transparent" unFocusColor="transparent" wrapText="true">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </JFXTextArea>
+                  </children>
+               </VBox>
+               <VBox fx:id="vbResult" VBox.vgrow="ALWAYS">
+                  <children>
+                     <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                           <MaterialDesignIconView glyphName="CLOUD_OUTLINE" glyphStyle="-fx-fill: #ecf0f1;" size="22">
+                              <HBox.margin>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </HBox.margin>
+                           </MaterialDesignIconView>
+                           <Label text="%gui.dialog.downloaded" textFill="#ecf0f1" HBox.hgrow="ALWAYS">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <JFXTextArea fx:id="taLinksDownloaded" focusColor="transparent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" promptText="%gui.dialog.downloaded" styleClass="text-area-transparent" unFocusColor="transparent" wrapText="true">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </JFXTextArea>
+                     <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                           <MaterialDesignIconView glyphName="CLOUD_OUTLINE_OFF" glyphStyle="-fx-fill: #ecf0f1;" size="22">
+                              <HBox.margin>
+                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              </HBox.margin>
+                           </MaterialDesignIconView>
+                           <Label text="%gui.dialog.not_downloaded" textFill="#ecf0f1">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children></HBox>
+                     <JFXTextArea fx:id="taLinksNotDownloaded" focusColor="transparent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" promptText="%gui.dialog.not_downloaded" styleClass="text-area-transparent" unFocusColor="transparent" wrapText="true">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </JFXTextArea>
+                  </children>
+               </VBox>
+                    <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" VBox.vgrow="ALWAYS" />
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            </VBox>
+        </center>
+        <bottom>
+            <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #2D2D2D;" spacing="10.0" BorderPane.alignment="CENTER">
+                <children>
+                    <JFXButton onAction="#closeDialog" styleClass="transparent-button-header" text="%gui.cancel" />
+               <JFXButton layoutX="378.0" layoutY="16.0" onAction="#reset" styleClass="transparent-button-header" text="%gui.filters.reset" />
+                    <JFXButton fx:id="btnCheck" onAction="#check" styleClass="default-button-header" text="%gui.dialog.check">
+                        <graphic>
+                            <MaterialDesignIconView glyphName="CLOUD_SYNC" glyphStyle="-fx-fill: #ecf0f1;" size="18" />
+                        </graphic>
+                    </JFXButton>
+                </children>
+                <padding>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

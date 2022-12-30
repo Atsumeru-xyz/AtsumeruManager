@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane fx:id="root" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" style="-fx-background-color: #2D2D2D;" stylesheets="@../../../css/theme.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.cards.ServerCardController">
+    <HBox fx:id="hbRoot" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" HBox.hgrow="ALWAYS">
+        <StackPane fx:id="pane" styleClass="border-transparent" HBox.hgrow="ALWAYS">
+            <Pane fx:id="pRippler" />
+            <VBox fx:id="vbRoot" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets bottom="3.0" left="8.0" top="3.0" />
+                </HBox.margin>
+                <Label fx:id="lblServiceName" maxWidth="1.7976931348623157E308" text="Title" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblServiceLink" layoutX="10.0" layoutY="30.0" maxWidth="1.7976931348623157E308" text="https://127.0.0.1:31337" textFill="#dddddd" />
+                <Label fx:id="lblServiceSlot" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Slot #1" textFill="#dddddd">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+            <StackPane.margin>
+               <Insets />
+            </StackPane.margin>
+            <padding>
+               <Insets bottom="2.0" left="8.0" top="2.0" />
+            </padding>
+            </VBox>
+        </StackPane>
+        <JFXButton fx:id="btnDeleteServer" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+            <graphic>
+                <MaterialDesignIconView glyphName="SERVER_REMOVE" glyphStyle="-fx-fill: #ecf0f1;" size="22px" />
+            </graphic>
+            <HBox.margin>
+                <Insets bottom="2.0" left="2.0" right="6.0" top="2.0" />
+            </HBox.margin>
+            <font>
+                <Font size="13.0" />
+            </font>
+            <padding>
+                <Insets bottom="4.0" top="4.0" />
+            </padding>
+        </JFXButton>
+    </HBox>
+</StackPane>

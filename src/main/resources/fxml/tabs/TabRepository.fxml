@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import xyz.atsumeru.manager.controls.EmptyView?>
+<?import xyz.atsumeru.manager.controls.ErrorView?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #2d2d2d;"
+            xmlns="http://javafx.com/javafx/11.0.14-internal"
+            fx:controller="xyz.atsumeru.manager.controller.tabs.TabRepositoryController">
+    <top>
+        <TabPane fx:id="tabsRepository"
+                 style="-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; -fx-animated: false"
+                 tabClosingPolicy="UNAVAILABLE" tabDragPolicy="FIXED"/>
+    </top>
+    <center>
+        <StackPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
+                        style="-fx-background-color: #2d2d2d;">
+                <FlowPane fx:id="fpItems" columnHalignment="CENTER" hgap="8.0" rowValignment="TOP"
+                          style="-fx-background-color: #2D2D2D;" vgap="8.0">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </padding>
+                </FlowPane>
+            </ScrollPane>
+            <EmptyView fx:id="vbEmptyView"/>
+            <ErrorView fx:id="vbErrorView"/>
+            <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0"
+                                StackPane.alignment="CENTER"/>
+        </StackPane>
+    </center>
+</BorderPane>

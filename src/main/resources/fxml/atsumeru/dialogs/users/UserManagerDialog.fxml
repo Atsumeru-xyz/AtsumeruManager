@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import xyz.atsumeru.manager.controls.EmptyView?>
+<?import xyz.atsumeru.manager.controls.ErrorView?>
+
+<?import com.jfoenix.controls.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="container" prefWidth="400" maxHeight="600.0" stylesheets="@../../../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.users.UserManagerDialogController">
+    <VBox spacing="10.0" style="-fx-background-color: #2d2d2d;">
+        <StackPane VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                <VBox fx:id="vbItemsList" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+            </ScrollPane>
+            <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" />
+            <EmptyView fx:id="evEmptyView"/>
+            <ErrorView fx:id="evErrorView"/>
+        </StackPane>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <JFXButton fx:id="btnCancel" onAction="#handleCancelButton" styleClass="transparent-button-header" text="%gui.cancel" HBox.hgrow="ALWAYS">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </JFXButton>
+            <JFXButton fx:id="btnAddUser" alignment="CENTER" prefHeight="32.0" ripplerFill="WHITE" styleClass="button-colored" text="%gui.add_user" textFill="WHITE" HBox.hgrow="ALWAYS">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </JFXButton>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+        </HBox>
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="10.0" top="10.0" />
+        </padding>
+    </VBox>
+</StackPane>

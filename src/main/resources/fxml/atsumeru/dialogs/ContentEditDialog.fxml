@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import xyz.atsumeru.manager.controls.DragNDropFilesView?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<StackPane fx:id="contentRoot" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #2D2D2D;" stylesheets="@/css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.ContentEditDialogController">
+    <VBox fx:id="contentSelect" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" StackPane.alignment="CENTER">
+        <Label fx:id="lblHint" alignment="CENTER" text="%gui.metadata_editor.select_files" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="50.0" left="150.0" right="150.0" />
+            </VBox.margin>
+         <graphic>
+            <MaterialDesignIconView fill="WHITE" glyphName="INFORMATION_OUTLINE" size="24" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+        </Label>
+        <DragNDropFilesView fx:id="dndFiles" VBox.vgrow="ALWAYS"
+                            chooserExtensionsFilterDescription="%gui.supported_formats"
+                            extensionsFilter="*.cbz,*.zip,*.epub,*.fb2,*.json">
+            <VBox.margin>
+                <Insets left="100.0" right="100.0"/>
+            </VBox.margin>
+        </DragNDropFilesView>
+        <StackPane.margin>
+            <Insets bottom="160.0" left="12.0" right="12.0" top="50.0" />
+        </StackPane.margin>
+    </VBox>
+    <MFXProgressSpinner fx:id="spinnerLoading" managed="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" visible="false" />
+    <BorderPane fx:id="contentEdit" style="-fx-background-color: #2d2d2d;">
+        <bottom>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                <children>
+                    <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: #707070" text="%gui.prompt.separate_by_comma" HBox.hgrow="ALWAYS" />
+                    <Label text="%gui.save_colon" />
+                    <JFXRadioButton fx:id="rbSaveToLinkedArchives" selected="true" text="%gui.dialog.metadata_editor.save_metadata_linked_archives" textFill="#ecf0f1" wrapText="true">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="rbMetadataSaveType" />
+                        </toggleGroup>
+                    </JFXRadioButton>
+                    <JFXRadioButton fx:id="rbSaveExternal" text="%gui.dialog.metadata_editor.save_metadata_external" textFill="#ecf0f1" toggleGroup="$rbMetadataSaveType" wrapText="true" />
+                    <JFXRadioButton fx:id="rbSaveIntoDBOnly" text="%gui.dialog.metadata_editor.save_metadata_only_db" textFill="#ecf0f1" toggleGroup="$rbMetadataSaveType" wrapText="true" />
+                    <JFXRadioButton fx:id="rbSaveSerieOnly" text="%gui.dialog.metadata_editor.save_metadata_serie_only" textFill="#ecf0f1" toggleGroup="$rbMetadataSaveType" wrapText="true" />
+                    <JFXButton fx:id="btnCancel" styleClass="transparent-button-medium" text="%gui.cancel" />
+                    <JFXButton fx:id="btnFetchMetadata" styleClass="default-button-medium" text="%gui.fetch_metadata" />
+                    <JFXButton fx:id="btnSave" styleClass="default-button-medium-bold" text="%gui.save">
+                        <graphic>
+                            <MaterialDesignIconView glyphName="FLOPPY" glyphStyle="-fx-fill: #ecf0f1;" size="14" />
+                        </graphic>
+                    </JFXButton>
+                </children>
+                <BorderPane.margin>
+                    <Insets />
+                </BorderPane.margin>
+                <padding>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+        </bottom>
+        <center>
+            <ScrollPane fx:id="spRoot" fitToWidth="true" style="-fx-background-color: #2d2d2d;">
+                <VBox fx:id="vbRoot" style="-fx-background-color: #2d2d2d;" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox VBox.vgrow="NEVER">
+                            <children>
+                                <VBox maxWidth="200.0" minWidth="200.0" spacing="6.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
+                                    <children>
+                                        <AnchorPane fx:id="coverPane" minHeight="280.0" minWidth="200.0">
+                                            <ImageView fx:id="shContentBackground" fitHeight="280.0" fitWidth="200.0" />
+                                            <ImageView fx:id="shContentCover" fitHeight="280.0" fitWidth="200.0" />
+                                            <HBox.margin>
+                                                <Insets left="25.0" />
+                                            </HBox.margin>
+                                        </AnchorPane>
+                                        <HBox alignment="CENTER" spacing="20.0">
+                                            <children>
+                                                <JFXCheckBox fx:id="cbMature" checkedColor="#B5305F" text=" ">
+                                                    <graphic>
+                                                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@/images/mature.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="cbAdult" checkedColor="#B5305F" text=" ">
+                                                    <graphic>
+                                                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@/images/adults_only.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </JFXCheckBox>
+                                            </children>
+                                        </HBox>
+                                        <Label text="%gui.dialog.metadata_editor.statuses_and_types">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <GridPane hgap="8.0" VBox.vgrow="ALWAYS">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" minWidth="20.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                            </rowConstraints>
+                                            <children>
+                                                <MFXComboBox fx:id="cbContentType" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.content_type" GridPane.columnIndex="1" />
+                                                <MFXComboBox fx:id="cbStatus" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <MFXComboBox fx:id="cbTransStatus" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.translation_status" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <MFXComboBox fx:id="cbCensorship" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.censorship" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <MFXComboBox fx:id="cbColor" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.color" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="TRANSLATE" layoutX="10.0" layoutY="85.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="BOOK_OPEN" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="BLUR_RADIAL" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="INVERT_COLORS" layoutX="10.0" layoutY="268.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="4" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="LEAD_PENCIL" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1" />
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets />
+                                            </VBox.margin>
+                                        </GridPane>
+
+                                        <HBox alignment="CENTER" managed="false" maxWidth="200.0" minWidth="200.0" spacing="10.0" visible="false" VBox.vgrow="NEVER">
+                                            <children>
+                                                <JFXButton fx:id="btnChangeImage" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="round-bordered-button" text=" ">
+                                                    <graphic>
+                                                        <FontAwesomeIconView glyphName="PENCIL" glyphStyle="-fx-fill: #E0E0E0;" size="16" />
+                                                    </graphic>
+                                                    <VBox.margin>
+                                                        <Insets />
+                                                    </VBox.margin>
+                                                    <padding>
+                                                        <Insets left="1.0" top="-1.0" />
+                                                    </padding>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnRestoreImage" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="round-bordered-button" text=" ">
+                                                    <graphic>
+                                                        <MaterialDesignIconView glyphName="RELOAD" glyphStyle="-fx-fill: #E0E0E0;" size="22" />
+                                                    </graphic>
+                                                    <padding>
+                                                        <Insets left="1.0" top="-1.0" />
+                                                    </padding>
+                                                </JFXButton>
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <GridPane>
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="26.0" minWidth="26.0" prefWidth="26.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="54.0" valignment="CENTER" vgrow="NEVER" />
+                                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="10.0" valignment="TOP" vgrow="NEVER" />
+                                            </rowConstraints>
+                                            <children>
+                                                <MaterialDesignIconView fill="WHITE" glyphName="RENAME_BOX" size="26" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                                <MFXTextField fx:id="tfTitle" floatMode="BORDER" floatingText="%gui.title" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </MFXTextField>
+                                                <MFXTextField fx:id="tfAltTitle" floatMode="BORDER" floatingText="%gui.alt_title" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </MFXTextField>
+                                                <MFXTextField fx:id="tfJapTitle" floatMode="BORDER" floatingText="%gui.jap_title" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </MFXTextField>
+                                                <MFXTextField fx:id="tfKorTitle" floatMode="BORDER" floatingText="%gui.kor_title" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </MFXTextField>
+                                                <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <MFXTextField fx:id="tfVolume" floatMode="BORDER" floatingText="%gui.volume" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " HBox.hgrow="NEVER">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
+                                                        </MFXTextField>
+                                                        <MaterialDesignIconView fill="WHITE" glyphName="TRENDING_UP" layoutX="346.0" layoutY="45.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                                        <MFXTextField fx:id="tfRating" floatMode="BORDER" floatingText="%gui.rating" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " HBox.hgrow="ALWAYS">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
+                                                        </MFXTextField>
+                                                        <MaterialDesignIconView fill="WHITE" glyphName="STAR_HALF" size="26" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                                        <MFXTextField fx:id="tfScore" floatMode="BORDER" floatingText="%gui.score" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " HBox.hgrow="ALWAYS">
+                                                            <font>
+                                                                <Font size="15.0" />
+                                                            </font>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
+                                                        </MFXTextField>
+                                                    </children>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </HBox>
+                                                <JFXTextArea fx:id="taLinks" focusColor="#B5305F" labelFloat="true" prefHeight="210.0" promptText="%gui.metadata_links" styleClass="text-area-transparent" unFocusColor="#434343" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                    <GridPane.margin>
+                                                        <Insets bottom="8.0" left="8.0" top="14.0" />
+                                                    </GridPane.margin>
+                                                </JFXTextArea>
+                                                <MFXTextField fx:id="tfFolder" editable="false" floatMode="BORDER" floatingText="%gui.folder" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <GridPane.margin>
+                                                        <Insets left="8.0" />
+                                                    </GridPane.margin>
+                                                </MFXTextField>
+                                                <MaterialDesignIconView fill="WHITE" glyphName="PENCIL_BOX_OUTLINE" layoutX="12.0" layoutY="43.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="LINK_VARIANT" layoutX="12.0" layoutY="93.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="6">
+                                                    <GridPane.margin>
+                                                        <Insets top="12.0" />
+                                                    </GridPane.margin>
+                                                </MaterialDesignIconView>
+                                                <MaterialDesignIconView fill="WHITE" glyphName="FOLDER_OUTLINE" layoutX="12.0" layoutY="143.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5" />
+                                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                                    <image>
+                                                        <Image url="@/images/icons/ideogram-cjk-variant.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                                    <image>
+                                                        <Image url="@/images/icons/ideogram-cjk.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <MaterialDesignIconView fill="WHITE" glyphName="NUMERIC" layoutX="12.0" layoutY="435.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="4" />
+                                                <MaterialDesignIconView fx:id="btnLockTitle" fill="WHITE" glyphName="LOCK_OPEN" layoutX="12.0" layoutY="45.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" />
+                                                <MaterialDesignIconView fx:id="btnLockAltTitle" fill="WHITE" glyphName="LOCK_OPEN" layoutX="546.0" layoutY="43.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                <MaterialDesignIconView fx:id="btnLockJapTitle" fill="WHITE" glyphName="LOCK_OPEN" layoutX="546.0" layoutY="93.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                <MaterialDesignIconView fx:id="btnLockKorTitle" fill="WHITE" glyphName="LOCK_OPEN" layoutX="546.0" layoutY="143.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </HBox>
+                        <GridPane layoutX="20.0" layoutY="507.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" />
+                            </rowConstraints>
+                            <children>
+                                <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="%gui.dialog.metadata_editor.main_info" />
+                                <Label maxWidth="1.7976931348623157E308" text="%gui.dialog.metadata_editor.additional_info" GridPane.columnIndex="2" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </GridPane>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="26.0" minWidth="26.0" prefWidth="26.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="26.0" minWidth="26.0" prefWidth="26.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                            </rowConstraints>
+                            <children>
+                                <MFXTextField fx:id="tfAuthors" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.authors" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfArtists" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.artists" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfPublisher" floatMode="BORDER" floatingText="%gui.publisher" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfCountry" floatMode="BORDER" floatingText="%gui.country" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfYear" floatMode="BORDER" floatingText="%gui.year" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfGenres" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.genres" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfTags" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.tags" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfLanguages" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.languages" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfTranslators" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.translators" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfCharacters" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.characters" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfParodies" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.parodies" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="3">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfEvent" floatMode="BORDER" floatingText="%gui.event" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="4">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfMagazines" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.magazines" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfCircles" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.circles" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="6">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MaterialDesignIconView fill="WHITE" glyphName="TRANSLATE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                <MaterialDesignIconView fill="WHITE" glyphName="FACE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                <MaterialDesignIconView fill="WHITE" glyphName="BOOK_OPEN" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                <MaterialDesignIconView fill="WHITE" glyphName="CHECKBOX_BLANK_CIRCLE_OUTLINE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icons/account-edit-outline.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                    <image>
+                                        <Image url="@/images/icons/notebook-edit-outline.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                    <image>
+                                        <Image url="@/images/icons/city-variant-outline.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                    <image>
+                                        <Image url="@/images/icons/map-marker-outline.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                                    <image>
+                                        <Image url="@/images/icons/counter.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                                    <image>
+                                        <Image url="@/images/icons/round_theater_comedy_white_18.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                                    <image>
+                                        <Image url="@/images/icons/round_sell_white_18.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                                    <image>
+                                        <Image url="@/images/icons/web.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="405.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                    <image>
+                                        <Image url="@/images/icons/balloon.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="405.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                    <image>
+                                        <Image url="@/images/icons/calendar-heart.png" />
+                                    </image>
+                                </ImageView>
+                                <MaterialDesignIconView fx:id="btnLockAuthors" fill="WHITE" glyphName="LOCK_OPEN" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="2" />
+                                <MaterialDesignIconView fx:id="btnLockArtists" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="45.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <MaterialDesignIconView fx:id="btnLockPublisher" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="99.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                <MaterialDesignIconView fx:id="btnLockCountry" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="153.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                <MaterialDesignIconView fx:id="btnLockYear" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="207.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                <MaterialDesignIconView fx:id="btnLockGenres" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="261.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                <MaterialDesignIconView fx:id="btnLockTags" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="315.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                <MaterialDesignIconView fx:id="btnLockLanguages" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="369.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" />
+                                <MaterialDesignIconView fx:id="btnLockTranslators" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="46.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                                <MaterialDesignIconView fx:id="btnLockCharacters" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="100.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                <MaterialDesignIconView fx:id="btnLockParodies" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="154.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                                <MaterialDesignIconView fx:id="btnLockEvent" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="208.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                                <MaterialDesignIconView fx:id="btnLockMagazines" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="262.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                <MaterialDesignIconView fx:id="btnLockCircles" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="262.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </GridPane>
+                        <HBox>
+                            <children>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/icons/image-text.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets top="6.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <JFXTextArea fx:id="taDescription" focusColor="#B5305F" labelFloat="true" promptText="%gui.description" styleClass="text-area-transparent" unFocusColor="#434343" wrapText="true" HBox.hgrow="ALWAYS">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="12.0" right="6.0" />
+                                    </HBox.margin>
+                                </JFXTextArea>
+                                <MaterialDesignIconView fx:id="btnLockDescription" fill="WHITE" glyphName="LOCK_OPEN" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="16.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <GridPane layoutX="20.0" layoutY="591.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" />
+                            </rowConstraints>
+                            <children>
+                                <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="%gui.dialog.metadata_editor.bound_services" />
+                                <Label maxWidth="1.7976931348623157E308" text="ID" GridPane.columnIndex="2">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </GridPane>
+                        <GridPane layoutX="20.0" layoutY="616.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                                <ColumnConstraints hgrow="ALWAYS" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="54.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="54.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="54.0" prefHeight="30.0" vgrow="NEVER" />
+                            </rowConstraints>
+                            <children>
+                                <MFXTextField fx:id="tfMyAnimeList" floatMode="BORDER" floatingText="MyAnimeList" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfShikimori" floatMode="BORDER" floatingText="Shikimori" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfKitsu" floatMode="BORDER" floatingText="Kitsu" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfAniList" floatMode="BORDER" floatingText="AniList" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfMangaUpdates" floatMode="BORDER" floatingText="MangaUpdates" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfAnimePlanet" floatMode="BORDER" floatingText="Anime-Planet" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfMyAnimeListID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfShikimoriID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfKitsuID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfAniListID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfMangaUpdatesID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfAnimePlanetID" floatMode="BORDER" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/services/myanimelist.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                    <image>
+                                        <Image url="@/images/services/shikimori.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                    <image>
+                                        <Image url="@/images/services/kitsu.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                    <image>
+                                        <Image url="@/images/services/anilist.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                                    <image>
+                                        <Image url="@/images/services/mangaupdates.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                                    <image>
+                                        <Image url="@/images/services/anime-planet.png" />
+                                    </image>
+                                </ImageView>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                           <image>
+                              <Image url="@/images/services/comicvine.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+                           <image>
+                              <Image url="@/images/services/comicsdb.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="8">
+                           <image>
+                              <Image url="@/images/services/hentag.png" />
+                           </image>
+                        </ImageView>
+                        <MFXTextField fx:id="tfComicVine" floatMode="BORDER" floatingText="ComicVine" layoutX="48.0" layoutY="285.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="tfComicsDB" floatMode="BORDER" floatingText="ComicsDB" layoutX="48.0" layoutY="339.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="tfHentag" floatMode="BORDER" floatingText="Hentag" layoutX="48.0" layoutY="393.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="tfComicVineID" floatMode="BORDER" layoutX="580.0" layoutY="285.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                        <MFXTextField fx:id="tfComicsDBID" floatMode="BORDER" layoutX="580.0" layoutY="339.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                        <MFXTextField fx:id="tfHentagID" floatMode="BORDER" layoutX="580.0" layoutY="393.0" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="3" GridPane.rowIndex="8">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                            </children>
+                        </GridPane>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+                    </padding>
+                </VBox>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+</StackPane>

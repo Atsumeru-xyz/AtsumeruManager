@@ -1,0 +1,1091 @@
+@font-face {
+    font-family: "Open Sans";
+}
+
+.root {
+    -fx-font-family: "Open Sans";
+
+    -fx-background-color: #2D2D2D;
+    -fx-accent-color: #B5305F;
+    -fx-color-primary-text: rgba(255, 255, 255, 0.87);
+    -fx-popup-pref-width: 230px;
+    -fx-tab-pane-mdiv-rotate: 90;
+}
+
+.tab-pane-main-mdiv {
+    -fx-fill: #ecf0f1;
+    -fx-rotate: -fx-tab-pane-mdiv-rotate;
+    -fx-font-family: 'Material Design Icons';
+    -fx-font-size: 30;
+}
+
+.library-content-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13.0;
+}
+
+.library-content-alt-title {
+    -fx-text-fill: white;
+    -fx-font-size: 11.0;
+}
+
+.library-content-volume {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-font-size: 0.87em;
+}
+
+.context-menu {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: white;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+    -fx-background-color: -fx-accent-color;
+}
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
+.border-transparent {
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
+
+.border-colored {
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
+
+.border-colored-slim {
+    -fx-border-width: 1px;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-radius: 6px;
+}
+
+.border-colored-bold {
+    -fx-border-width: 2px;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-radius: 6px;
+}
+
+.genre-chip-border {
+    -fx-background-radius: 14;
+    -fx-background-color: transparent;
+    -fx-border-width: 0.7px;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 14;
+}
+
+.genre-chip-border-colored {
+    -fx-background-radius: 14;
+    -fx-background-color: transparent;
+    -fx-border-width: 0.7px;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-radius: 14;
+}
+
+.background-transparent {
+    -fx-background-color: transparent;
+}
+
+.background-colored {
+    -fx-background-color: -fx-accent-color;
+}
+
+.green-spinner .arc {
+    -fx-stroke: -fx-accent-color;
+    -fx-stroke-width: 4;
+}
+
+.round-bordered-button {
+    -fx-background-radius: 40;
+    -fx-background-color: transparent;
+    -fx-border-radius: 40;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 1;
+}
+
+.default-button {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #FFFFFF;
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+.default-button-header {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14;
+}
+
+.default-button-medium {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13;
+}
+
+.default-button-medium-bold {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13;
+    -fx-font-weight: bold
+}
+
+.transparent-button-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14;
+}
+
+.transparent-button-medium {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13;
+}
+
+.paddingless-list-cell .list-cell {
+    -fx-padding: -1px;
+}
+
+.light-list-cell .list-cell:odd {
+    -fx-background-color: #2d2d2d;
+}
+.light-list-cell .list-cell:even {
+    -fx-background-color: #2d2d2d;
+}
+
+.button-colored-no-shadow {
+    -fx-background-radius: 3;
+    -fx-background-color: -fx-accent-color;
+}
+
+.button-colored {
+    -fx-background-radius: 3;
+    -fx-background-color: -fx-accent-color;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);
+}
+
+.button-transparent {
+    -fx-background-radius: 3;
+    -fx-background-color: transparent;
+}
+
+.upload-box {
+    -fx-border-width: 4;
+    -fx-border-style: dashed;
+    -fx-border-radius: 12;
+}
+
+.upload-box.inactive {
+    -fx-border-color: grey;
+}
+
+.upload-box.active {
+    -fx-border-color: -fx-accent-color;
+}
+
+.progress-bar {
+    -fx-background-color: transparent;
+    -fx-box-border: transparent;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: #ecf0f1;
+}
+
+.progress-bar .bar {
+    -fx-background-color: -fx-accent-color;
+}
+
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}
+
+.dark-progress-bar {
+    -fx-background-color: #242627;
+    -fx-box-border: #242627;
+    -fx-text-box-border: #242627;
+    -fx-control-inner-background: #242627;
+}
+
+.dark-progress-bar .bar {
+    -fx-background-color: -fx-accent-color;
+}
+
+.dark-progress-bar > .bar, .dark-progress-bar > .track {
+    -fx-background-insets: 0;
+}
+/*******************************************************
+*                           						   *
+* Individual section                     	           *
+*                          							   *
+*******************************************************/
+
+/* .paragraph-box > .paragraph-text > .text {
+    -fx-fill: #ecf0f1;
+} */
+
+/*******************************************************
+*                           						   *
+* Separator                                            *
+*                          							   *
+*******************************************************/
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: -fx-accent-color;
+}
+
+/*******************************************************
+*                           						   *
+* MFXCustomProgressBars                                *
+*                          							   *
+*******************************************************/
+#secondaryProgress .bar1 {
+    -fx-fill: #512DA8;
+}
+
+#webPConversionProgress .bar1 {
+    -fx-fill: #f39c12;
+}
+
+#pngOptimizationProgress .bar1 {
+    -fx-fill: #273c75;
+}
+
+#duplicatesSearchProgress .bar1 {
+    -fx-fill: #2980b9;
+}
+
+#coversDownloaderProgress .bar1 {
+    -fx-fill: #8e44ad;
+}
+
+#cbzPackProgress .bar1 {
+    -fx-fill: #c0392b;
+}
+
+.virtualized-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.virtualized-scroll-pane {
+    -fx-background-color: #2D2D2D;
+    -fx-border-color: #2D2D2D;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+    -fx-background-insets: 0;
+}
+
+.virtualized-scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.virtualized-scroll-pane .scroll-bar:horizontal .increment-button,
+.virtualized-scroll-pane .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+.virtualized-scroll-pane .scroll-bar:vertical .increment-button,
+.virtualized-scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+
+.virtualized-scroll-pane .scroll-bar .increment-arrow,
+.virtualized-scroll-pane .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.virtualized-scroll-pane .scroll-bar:horizontal .thumb,
+.virtualized-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 50%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+.virtualized-scroll-pane .scroll-bar:horizontal .track,
+.virtualized-scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* Status Bar                                           *
+*                          							   *
+*******************************************************/
+.status-bar .progress-bar {
+    -fx-background-color: #242627;
+    -fx-box-border: #242627;
+    -fx-text-box-border: #242627;
+    -fx-control-inner-background: #242627;
+}
+
+.status-bar .progress-bar .bar {
+    -fx-background-color: -fx-accent-color;
+}
+
+.status-bar .progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
+}
+
+/*******************************************************
+*                           						   *
+* ToggleButton                                         *
+*                          							   *
+*******************************************************/
+.toggle-button {
+    -fx-background-color: #242627;
+    -fx-text-fill: white;
+}
+
+.toggle-button:selected {
+    -fx-background-color: -fx-accent-color;
+}
+
+/*******************************************************
+*                           						   *
+* Dialogs                                              *
+*                          							   *
+*******************************************************/
+.dialogDefault{
+    -fx-background-color: #2D2D2D;
+    /*-fx-background-radius: 5 5 5 5;*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+.dialogDefault > *.button-bar > *.container{
+    -fx-background-color: #2D2D2D;
+    /*-fx-background-radius: 5 5 5 5;*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+.dialogDefault > *.label.content{
+    -fx-font-size: 12px;
+    /*-fx-font-weight: bold;*/
+}
+.dialogDefault:header *.header-panel{
+    -fx-background-color: #2D2D2D;
+    /*-fx-background-radius: 5 5 5 5;*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+.dialogDefault:header *.header-panel *.label{
+    -fx-font-size: 14px;
+    /*-fx-font-style: italic;*/
+    -fx-fill: #292929;
+}
+.dialogDefault .button-bar .button:default {
+    -fx-padding: 0.6em 0.47em;
+    -fx-font-size: 14px;
+    /*-fx-font-weight: bold;*/
+    -jfx-button-type: RAISED;
+    -fx-background-color: rgb(77, 102, 204);
+    -fx-text-fill: WHITE;
+}
+.dialogDefault .button-bar .button {
+    -fx-padding: 0.6em 0.47em;
+    -fx-font-size: 14px;
+    /*-fx-font-weight: bold;*/
+    -jfx-button-type: RAISED;
+    -fx-background-color: transparent;
+    -fx-text-fill: WHITE;
+}
+
+/*******************************************************************************
+*                                                                              *
+* JFX Decorator                                                                *
+*                                                                              *
+*******************************************************************************/
+
+.jfx-decorator {
+    -fx-decorator-color: #2d2d2d;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0 4 4 4;
+}
+
+/*******************************************************************************
+*                                                                              *
+* JFXDialog                                                                    *
+*                                                                              *
+*******************************************************************************/
+.jfx-dialog-layout {
+    -fx-background-color: #2d2d2d;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-insets: 12px;
+}
+
+/*******************************************************************************
+*                                                                              *
+* JFXCustomPopup                                                               *
+*                                                                              *
+*******************************************************************************/
+.jfx-popup-container {
+    -fx-background-color: #2d2d2d;
+    -fx-pref-width: -fx-popup-pref-width;
+}
+
+.jfx-popup-medium .jfx-popup-container {
+    -fx-background-color: #2d2d2d;
+    -fx-pref-width: 298px;
+}
+
+.jfx-popup-long .jfx-popup-container {
+    -fx-background-color: #2d2d2d;
+    -fx-pref-width: 348px;
+}
+
+/*******************************************************************************
+*                                                                              *
+* JFXSnackbar                                                                  *
+*                                                                              *
+*******************************************************************************/
+
+.jfx-snackbar-content:success-toast {
+    -fx-background-color: #009432;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 16px;
+    -fx-border-insets: 16px;
+    -fx-background-insets: 16px;
+}
+
+.jfx-snackbar-content:error-toast {
+    -fx-background-color: #c23616;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 16px;
+    -fx-border-insets: 16px;
+    -fx-background-insets: 16px;
+}
+
+.jfx-snackbar-content:warning-toast {
+    -fx-background-color: #f39c12;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 16px;
+    -fx-border-insets: 16px;
+    -fx-background-insets: 16px;
+}
+
+.jfx-snackbar-toast {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16;
+}
+
+/*******************************************************
+*                           						   *
+* JFXComboBox                                          *
+*                          							   *
+*******************************************************/
+.jfx-combo-box .list-cell {
+    -fx-background-color: #2d2d2d;
+}
+
+/*******************************************************
+*                           						   *
+* JFXProgressBar                                       *
+*                          							   *
+*******************************************************/
+.deep-purple-jfx-progress-bar .bar {
+    -fx-background-color:
+    -fx-box-border,
+            linear-gradient(to bottom, derive(-fx-accent,95%), derive(-fx-accent,10%)),
+            #512DA8; /* this line is the background color of the bar */
+    -fx-background-insets: 0;
+    -fx-padding: 0.1em;
+}
+
+
+/*******************************************************
+*                           						   *
+* All nodes section                     	           *
+*                          							   *
+*******************************************************/
+/*******************************************************
+*                           						   *
+* Label                                                *
+*                          							   *
+*******************************************************/
+.label {
+    -fx-text-fill: #ecf0f1;
+}
+
+/*******************************************************
+*                           						   *
+* CheckBox                                             *
+*                          							   *
+*******************************************************/
+.check-box {
+    -fx-text-fill: #ecf0f1;
+}
+
+/*******************************************************
+*                           						   *
+* JFXCheckbox					                       *
+*                          							   *
+*******************************************************/
+
+.jfx-check-box {
+    -jfx-checked-color: -fx-accent-color;
+}
+
+/*******************************************************
+*                           						   *
+* JFXSlider					                           *
+*                          							   *
+*******************************************************/
+
+.jfx-slider > .thumb {
+    -fx-background-color: -fx-accent-color;
+}
+
+.jfx-slider>.colored-track {
+    -fx-background-color: -fx-accent-color;
+}
+
+.jfx-slider>.animated-thumb {
+    -fx-background-color: -fx-accent-color;
+}
+
+/*******************************************************
+*                           						   *
+* JFXTextField                                         *
+*                          							   *
+*******************************************************/
+.jfx-text-field {
+    -fx-text-fill: #ecf0f1;
+}
+
+/*******************************************************
+*                           						   *
+* JFXPasswordField                                     *
+*                          							   *
+*******************************************************/
+.jfx-password-field {
+    -fx-text-fill: #ecf0f1;
+}
+
+/*******************************************************
+*                           						   *
+* JFXRadioButton                                       *
+*                          							   *
+*******************************************************/
+.jfx-radio-button {
+    -fx-text-fill: #ecf0f1;
+}
+
+/*******************************************************
+*                           						   *
+* JFXTreeTableView                                     *
+*                          							   *
+*******************************************************/
+.tree-table-view {
+    -fx-background-color: #2D2D2D;
+}
+
+.tree-table-view .headers-region {
+    -fx-background-color: #2D2D2D;
+}
+
+.tree-table-view .tab-header-background {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* SplitPane                                            *
+*                          							   *
+*******************************************************/
+.split-pane {
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 0;
+    -fx-padding: 0;
+}
+
+.split-pane-divider {
+    -fx-border-width: 1px;
+    -fx-background-color: #373737;
+}
+
+/*******************************************************
+*                           						   *
+* TabPane                                              *
+*                          							   *
+*******************************************************/
+.tab-pane {
+    -fx-tab-min-height: 6.68mm;
+    -fx-tab-max-height: 6.68mm;
+    -tab-background: #2D2D2D;
+    -tab-text: white;
+    -tab-text-selected: white;
+    -tab-divider: transparent;
+    -tab-divider-selected: -fx-accent-color;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-insets: 0, 0, 0;
+}
+
+.tab-pane > .tab-header-area {
+    -fx-padding: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0, 0, 0;
+    -fx-padding: 1mm 1.92mm 1mm 1.92mm;
+    -fx-border-width: 1, 2;
+    -fx-border-color: transparent, transparent transparent transparent transparent;
+    -fx-background-color: -tab-background;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-border-radius: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -tab-text;
+    -fx-font-size: 13px;
+    -fx-padding: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+    -fx-text-fill: -tab-text-selected;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-color: transparent, transparent transparent -tab-divider-selected transparent;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-insets: 0;
+    -fx-background-color: -tab-background;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-border-width: 1;
+    -fx-border-color: transparent transparent -tab-divider transparent;
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button {
+    -fx-padding: 0;
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .arrow {
+    -fx-padding: 0;
+}
+
+/*******************************************************
+*                           						   *
+* JFXTabPane                                           *
+*                          							   *
+*******************************************************/
+.jfx-tab-pane {
+    -jfx-disable-animation: true;
+}
+
+.jfx-tab-pane .headers-region .tab:closable {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 0;
+}
+
+.jfx-tab-pane .headers-region {
+    -fx-background-color: #2D2D2D;
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #2D2D2D;
+}
+
+.jfx-tab-pane .tab-header-area .tab-selected-line{
+    -fx-background-color: -fx-accent-color;
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: -fx-accent-color;
+}
+
+.jfx-tab-pane .depth-container {
+    -fx-effect: none;
+}
+
+.repo-jfx-tab-pane .headers-region {
+    -fx-background-color: #1d1f21;
+}
+
+.repo-jfx-tab-pane .tab-header-background {
+    -fx-background-color: #1d1f21;
+}
+
+.repo-jfx-tab-pane .tab-header-area .tab-selected-line{
+    -fx-background-color: #ecf0f1;
+}
+
+.repo-jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: #ecf0f1;
+}
+
+.repo-jfx-tab-pane .depth-container {
+    -fx-effect: none;
+}
+
+/*******************************************************
+*                           						   *
+* JFXTextArea                                          *
+*                          							   *
+*******************************************************/
+.text-area .content {
+    -fx-background-color: #1D1F21;
+}
+
+.text-area-transparent {
+    -fx-text-fill: white;
+}
+
+.text-area-transparent .content {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+/*******************************************************
+*                           						   *
+* ChoiceBox                                            *
+*                          							   *
+*******************************************************/
+
+.choice-box {
+    -fx-mark-color: #ecf0f1;
+}
+
+.choice-box .label {
+    -fx-text-fill: #ecf0f1;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* For ScrollPane in Maintain section 	               *
+*                          							   *
+*******************************************************/
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: #2D2D2D;
+    -fx-border-color: #2D2D2D;
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:horizontal .increment-button,
+.scroll-pane .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+
+.scroll-pane .scroll-bar .increment-arrow,
+.scroll-pane .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 50%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+.scroll-pane .scroll-bar:horizontal .track,
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* For JFXListView in Maintain section 	               *
+*                          							   *
+*******************************************************/
+
+.jfx-list-view {
+    -fx-border-width: 0px;
+    -fx-padding: 0px;
+    -fx-background-insets: 0;
+}
+
+.jfx-list-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.jfx-list-view .scroll-bar:horizontal .increment-button ,
+.jfx-list-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+.jfx-list-view .scroll-bar:vertical .increment-button,
+.jfx-list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+
+.jfx-list-view .scroll-bar .increment-arrow,
+.jfx-list-view .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+.jfx-list-view .scroll-bar:horizontal .thumb,
+.jfx-list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 50%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+.jfx-list-view .scroll-bar:horizontal .track,
+.jfx-list-view .scroll-bar:vertical .track {
+    -fx-background-color: #1d1f21;
+}
+
+/*******************************************************
+*                           						   *
+* For ListCeil in JFXListView in Maintain section 	   *
+*                          							   *
+*******************************************************/
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #F2F0EC;
+}
+.list-cell {
+    -fx-text-fill: #F2F0EC;
+}
+.list-cell:odd {
+    -fx-background-color: #2d2d2d;
+}
+.list-cell:even {
+    -fx-background-color: #2d2d2d;
+}
+.list-cell:filled:hover {
+    //-fx-background-color: #00f;
+    //-fx-text-fill: white;
+}
+
+.catalogue-list .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #F2F0EC;
+}
+.catalogue-list .list-cell {
+    -fx-text-fill: #F2F0EC;
+}
+.catalogue-list .list-cell:odd {
+    -fx-background-color: #2D2D2D;
+}
+.catalogue-list .list-cell:even {
+    -fx-background-color: #2D2D2D;
+}
+
+.catalogue-list .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.catalogue-list .scroll-bar:horizontal {
+    -fx-scale-x: 0;
+}
+
+.tree-filter .tree-cell:filled:selected:focused, .tree-filter .tree-cell:filled:selected {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: #F2F0EC;
+}
+.tree-filter .tree-cell {
+    -fx-text-fill: #F2F0EC;
+    -fx-font-size: 12;
+}
+.tree-filter .tree-cell:odd {
+    -fx-background-color: #2d2d2d;
+}
+.tree-filter .tree-cell:even {
+    -fx-background-color: #2d2d2d;
+}
+.tree-filter .tree-cell  {
+    /*-fx-indent: 0;*/
+}
+.tree-filter .tree-cell > .tree-disclosure-node > .arrow  {
+    -fx-background-color: white;
+}
+.tree-filter .tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-background-color: white;
+}
+.tree-filter .tree-cell .selection-bar {
+    -fx-background-color: -fx-accent-color;
+}
+.tree-filter .scroll-bar {
+    -fx-background-color: transparent;
+}
+.tree-filter .scroll-bar:horizontal .increment-button,
+.tree-filter .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+.tree-filter .scroll-bar:vertical .increment-button,
+.tree-filter .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+.tree-filter .scroll-bar .increment-arrow,
+.tree-filter .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+.tree-filter > .virtual-flow > .corner,
+.tree-filter > .virtual-flow > .corner {
+    -fx-background-color: transparent;
+}
+.tree-filter .scroll-bar:horizontal .thumb,
+.tree-filter .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 50%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 0em;
+}
+.tree-filter .scroll-bar:horizontal .track,
+.tree-filter .scroll-bar:vertical .track {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* For the sliders 						               *
+*                          							   *
+*******************************************************/
+
+.jfx-slider-style {
+    -jfx-indicator-position: right;
+}
+
+.jfx-slider-style > .thumb {
+    -fx-background-color: #03a9f4;
+}
+
+.jfx-slider-style .track {
+    -fx-background-color: #ff5252;
+    -fx-pref-height: 5px;
+    -fx-pref-width: 5px;
+}
+
+.jfx-slider-style .sliderValue {
+    -fx-stroke: WHITE;
+    -fx-font-size: 10.0;
+}
+
+
+/*******************************************************
+*                           						   *
+* GridView ScrollBars    				               *
+*                          							   *
+*******************************************************/
+.grid-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.grid-view .scroll-bar:horizontal .increment-button,
+.grid-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+.grid-view .scroll-bar:vertical .increment-button,
+.grid-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+
+.grid-view .scroll-bar .increment-arrow,
+.grid-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.grid-view .scroll-bar:horizontal .thumb,
+.grid-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 50%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+.grid-view .scroll-bar:horizontal .track,
+.grid-view .scroll-bar:vertical .track {
+    -fx-background-color: #2D2D2D;
+}
+
+/*******************************************************
+*                           						   *
+* RichTextFX Styles     				               *
+*                          							   *
+*******************************************************/
+.codearea {
+    -fx-fill: #ffffff;
+}
+
+.test-success {
+    -fx-fill: #27ae60;
+}
+
+.test-fail {
+    -fx-fill: #e74c3c;
+}
+
+.test-disabled {
+    -fx-fill: #f39c12;
+}
+
+.test-count {
+    -fx-fill: #9b59b6;
+}

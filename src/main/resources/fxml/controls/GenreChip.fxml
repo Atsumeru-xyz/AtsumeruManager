@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<fx:root fx:id="root" maxHeight="24.0" minHeight="24.0" styleClass="genre-chip-border" type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Pane fx:id="rippler" maxHeight="24.0" minHeight="24.0" style="-fx-background-radius: 14;">
+         <StackPane.margin>
+            <Insets left="1.0" />
+         </StackPane.margin></Pane>
+        <Label fx:id="lblChipText" text="Chip text" textFill="WHITE" HBox.hgrow="ALWAYS" StackPane.alignment="CENTER">
+            <font>
+                <Font size="13.0" />
+            </font>
+            <padding>
+                <Insets bottom="2.0" left="8.0" right="8.0" top="2.0" />
+            </padding>
+        </Label>
+    </children>
+</fx:root>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<fx:root alignment="CENTER_LEFT" prefWidth="400.0" style="-fx-background-color: #2d2d2d" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane fx:id="pane" styleClass="border-transparent" HBox.hgrow="ALWAYS">
+        <Pane fx:id="rippler" />
+        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets bottom="3.0" left="8.0" top="3.0" />
+            </HBox.margin>
+            <!-- Username -->
+            <Label fx:id="lblUsername" maxWidth="1.7976931348623157E308" text="Username" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Label>
+            <!-- Roles -->
+            <Label fx:id="lblRoles" layoutX="10.0" layoutY="30.0" maxWidth="1.7976931348623157E308" text="ADMIN" textFill="#dddddd">
+                <graphic>
+                    <MaterialDesignIconView glyphName="ACCOUNT_STAR" glyphStyle="-fx-fill: #ecf0f1;" size="18px" />
+                </graphic>
+            </Label>
+            <!-- Authorities -->
+            <Label fx:id="lblAuthorities" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="IMPORTER" textFill="#dddddd">
+                <graphic>
+                    <MaterialDesignIconView glyphName="ACCOUNT_KEY" glyphStyle="-fx-fill: #ecf0f1;" size="18px" />
+                </graphic>
+            </Label>
+            <!-- Allowed Categories -->
+            <Label fx:id="lblAllowedCategories" layoutX="18.0" layoutY="53.0" maxWidth="1.7976931348623157E308" text="ALL" textFill="#dddddd">
+                <graphic>
+                    <MaterialDesignIconView glyphName="ACCOUNT_CHECK" glyphStyle="-fx-fill: #ecf0f1;" size="18px" />
+                </graphic>
+            </Label>
+            <!-- Disallowed Genres -->
+            <Label fx:id="lblDisallowedGenres" layoutX="18.0" layoutY="53.0" maxWidth="1.7976931348623157E308" text="ALL" textFill="#dddddd">
+                <graphic>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@/images/icons/round_theater_comedy_white_18.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            <padding>
+               <Insets left="1.0" />
+            </padding>
+            </Label>
+            <!-- Disallowed Tags -->
+            <Label fx:id="lblDisallowedTags" layoutX="18.0" layoutY="53.0" maxWidth="1.7976931348623157E308" text="ALL" textFill="#dddddd">
+                <graphic>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@/images/icons/round_sell_white_18.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            <padding>
+               <Insets left="1.0" />
+            </padding>
+            </Label>
+            <StackPane.margin>
+                <Insets />
+            </StackPane.margin>
+            <padding>
+                <Insets bottom="6.0" left="8.0" />
+            </padding>
+        </VBox>
+        <HBox.margin>
+            <Insets left="6.0" right="8.0" />
+        </HBox.margin>
+    </StackPane>
+   <VBox alignment="CENTER" spacing="8.0">
+      <children>
+          <JFXButton fx:id="btnEditUser" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+              <graphic>
+                  <MaterialDesignIconView glyphName="ACCOUNT_SETTINGS_VARIANT" glyphStyle="-fx-fill: #ecf0f1;" size="22px" />
+              </graphic>
+              <font>
+                  <Font size="13.0" />
+              </font>
+              <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+              </padding>
+          </JFXButton>
+          <JFXButton fx:id="btnDeleteUser" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+              <graphic>
+                  <MaterialDesignIconView glyphName="ACCOUNT_REMOVE" glyphStyle="-fx-fill: #ecf0f1;" size="22px" />
+              </graphic>
+              <font>
+                  <Font size="13.0" />
+              </font>
+              <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+              </padding>
+          </JFXButton>
+      </children>
+      <padding>
+         <Insets left="8.0" right="8.0" />
+      </padding>
+   </VBox>
+    <padding>
+        <Insets right="6.0" />
+    </padding>
+</fx:root>

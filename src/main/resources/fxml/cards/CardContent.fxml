@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="root" prefWidth="150.0" stylesheets="@../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.cards.CardContentController">
+    <StackPane fx:id="container" alignment="TOP_CENTER" style="-fx-background-color: transparent">
+        <ProgressBar fx:id="pbProgress" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="206.0" progress="0.5" visible="false">
+            <StackPane.margin>
+                <Insets />
+            </StackPane.margin>
+        </ProgressBar>
+        <StackPane fx:id="spCover" style="-fx-background-color: transparent" visible="false">
+            <children>
+                <ImageView fx:id="ivLandscapePoster" disable="true" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" />
+                <ImageView fx:id="ivPoster" disable="true" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" />
+            </children>
+            <padding>
+                <Insets bottom="6.0" />
+            </padding>
+        </StackPane>
+        <Pane fx:id="pnInfoMask" maxHeight="-Infinity" prefHeight="20.0" style="-fx-background-color: linear-gradient(to bottom, transparent, black); -fx-opacity: 0.5; -fx-background-radius: 0 0 8 8;" StackPane.alignment="BOTTOM_CENTER">
+            <StackPane.margin>
+                <Insets bottom="6.0" />
+            </StackPane.margin>
+        </Pane>
+        <StackPane fx:id="spProgressInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" style="-fx-background-color: -fx-accent-color; -fx-background-radius: 6 6 0 0;" visible="false" StackPane.alignment="BOTTOM_CENTER">
+            <StackPane.margin>
+                <Insets bottom="6.0" />
+            </StackPane.margin>
+            <children>
+                <Label fx:id="lblProgressInfo" text="6 / 181 pages" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+               <StackPane.margin>
+                  <Insets left="8.0" right="8.0" />
+               </StackPane.margin>
+                </Label>
+            </children>
+        </StackPane>
+        <StackPane fx:id="selection" />
+        <VBox alignment="TOP_RIGHT" spacing="3.0" StackPane.alignment="TOP_RIGHT">
+            <children>
+                <Label fx:id="lblScore" alignment="TOP_LEFT" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets right="4.0" />
+                    </VBox.margin>
+                </Label>
+            </children>
+        </VBox>
+        <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" startingAngle="-120.0" StackPane.alignment="CENTER" />
+    </StackPane>
+    <HBox spacing="4.0">
+        <children>
+            <ImageView fx:id="ivAgeRatingBadge" fitHeight="16.0" fitWidth="16.0" managed="false" pickOnBounds="true" preserveRatio="true" visible="false">
+                <image>
+                    <Image url="@../../images/adults_only.png" />
+                </image>
+            </ImageView>
+            <Label fx:id="lblTitle">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+        </children>
+        <padding>
+            <Insets left="2.0" right="2.0" top="4.0" />
+        </padding>
+    </HBox>
+    <Label fx:id="lblSubtitle">
+        <font>
+            <Font size="11.0" />
+        </font>
+        <padding>
+            <Insets left="2.0" right="2.0" />
+        </padding>
+    </Label>
+   <Label fx:id="lblSubSubtitle" managed="false" visible="false">
+      <font>
+         <Font size="11.0" />
+      </font>
+      <padding>
+         <Insets left="2.0" right="2.0" />
+      </padding>
+   </Label>
+</VBox>

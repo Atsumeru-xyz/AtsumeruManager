@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import xyz.atsumeru.manager.controls.DragNDropFilesView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<BorderPane prefWidth="500.0" style="-fx-background-color: #2D2D2D;" stylesheets="@../../../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.uploader.UploadFilesDialogController">
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #2D2D2D;" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+            <JFXCheckBox fx:id="cbOverrideFiles" mnemonicParsing="false" text="%gui.upload_override" textFill="WHITE" HBox.hgrow="ALWAYS" />
+            <JFXCheckBox fx:id="cbRepackFiles" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="%gui.upload_repack" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                <MFXProgressSpinner fx:id="spinnerProgress" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" startingAngle="-120.0" />
+                <JFXButton fx:id="btnCancel" onAction="#closeDialog" styleClass="transparent-button-header" text="%gui.cancel" />
+                <JFXButton fx:id="btnUpload" onAction="#upload" styleClass="default-button-header" text="%gui.upload">
+                    <graphic>
+                        <MaterialDesignIconView glyphName="UPLOAD" glyphStyle="-fx-fill: #ecf0f1;" size="17" />
+                    </graphic>
+                </JFXButton>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
+   <center>
+       <DragNDropFilesView fx:id="uploadFiles" style="-fx-background-color: #2D2D2D;" prefHeight="250.0" chooserExtensionsFilterDescription="%gui.supported_archive_formats" extensionsFilter="*.cbz,*.zip,*.cbr,*.rar" BorderPane.alignment="CENTER" >
+           <padding>
+               <Insets bottom="10.0" left="16.0" right="16.0" top="16.0" />
+           </padding>
+       </DragNDropFilesView>
+   </center>
+</BorderPane>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.materialdesignicons.*?>
+<?import de.jensd.fx.glyphs.materialicons.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="contentRoot" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #2D2D2D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.fragments.DetailsFragmentController">
+    <SplitPane dividerPositions="0.5">
+        <ScrollPane fx:id="spContentDetails" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" />
+        <ScrollPane fx:id="spItemsList" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" minWidth="210.0" pannable="true" GridPane.columnIndex="1">
+            <content>
+                <VBox fx:id="vbItemsRoot" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D2D2D;">
+                    <children>
+                        <HBox fx:id="hbHeader" alignment="TOP_CENTER" minHeight="-Infinity" spacing="8.0" style="-fx-border-width: 0px 0px 1px 0px;" VBox.vgrow="NEVER">
+                            <children>
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0" HBox.hgrow="ALWAYS">
+                           <children>
+                                      <Label fx:id="lblVolumes" managed="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-width: 0 0 2 0;" text="%gui.volume_list" textFill="WHITE" visible="false">
+                                          <font>
+                                              <Font name="System Bold" size="16.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="lblChapters" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-width: 0 0 2 0;" text="%gui.chapter_list" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="16.0" />
+                                          </font>
+                                      </Label>
+                           </children>
+                        </HBox>
+                                <JFXButton fx:id="btnUpload" alignment="CENTER" buttonType="RAISED" layoutX="370.0" layoutY="10.0" prefHeight="32.0" ripplerFill="WHITE" styleClass="border-transparent" text="%gui.upload_file" textFill="WHITE" visible="false">
+                                    <graphic>
+                                        <MaterialDesignIconView glyphName="UPLOAD" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="btnRescan" alignment="CENTER" buttonType="RAISED" layoutX="370.0" layoutY="10.0" prefHeight="32.0" ripplerFill="WHITE" styleClass="border-transparent" text="%gui.import.rescan" textFill="WHITE" visible="false">
+                                    <graphic>
+                                        <MaterialDesignIconView glyphName="RELOAD" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="btnEditMetadata" alignment="CENTER" buttonType="RAISED" layoutX="370.0" layoutY="10.0" prefHeight="32.0" ripplerFill="WHITE" styleClass="border-transparent" text="%gui.button.edit" textFill="WHITE" visible="false">
+                                    <graphic>
+                                        <MaterialDesignIconView glyphName="PENCIL" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="bntGoBack" alignment="CENTER" buttonType="RAISED" onAction="#goBack" prefHeight="32.0" ripplerFill="WHITE" style="-fx-background-radius: 5;" styleClass="border-transparent" text="%gui.back_ellipsize" textFill="WHITE">
+                                    <graphic>
+                                        <FontAwesomeIconView glyphName="LEVEL_UP" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+                                    </graphic>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </JFXButton>
+                                <MaterialIconView fx:id="iconSelectAll" glyphName="DONE_ALL" glyphStyle="-fx-fill: #ecf0f1;" size="20">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                    </HBox.margin>
+                                </MaterialIconView>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="8.0" left="4.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <StackPane maxHeight="1.7976931348623157E308" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                            <children>
+                                <FlowPane fx:id="fpItemsList" maxHeight="1.7976931348623157E308">
+                                    <padding>
+                                        <Insets bottom="10.0" top="6.0" />
+                                    </padding>
+                                </FlowPane>
+                                <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" />
+                            </children>
+                        </StackPane>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="8.0" right="10.0" top="8.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </SplitPane>
+</StackPane>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane stylesheets="@../../../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.importer.AddContentFolderDialogController">
+    <BorderPane prefHeight="250.0" prefWidth="600.0">
+        <center>
+            <VBox layoutX="10.0" style="-fx-background-color: #2D2D2D;" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <children>
+                    <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                            <FontAwesomeIconView glyphName="FOLDER" glyphStyle="-fx-fill: #ecf0f1;" size="20">
+                                <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                </HBox.margin>
+                            </FontAwesomeIconView>
+                            <Label text="%gui.folder_to_import" textFill="#ecf0f1" HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0">
+                        <children>
+                            <JFXTextField fx:id="tfFolderToImport" focusColor="#ffffff00" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="%gui.folder_path" style="-fx-text-fill: #ecf0f1;" unFocusColor="#1b1d1f00" HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font size="13.0" />
+                                </font>
+                            </JFXTextField>
+                            <JFXButton fx:id="btnSelectFolder" alignment="CENTER" contentDisplay="CENTER" minWidth="32.0" onAction="#selectFolder" prefHeight="36.0" prefWidth="32.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+                                <graphic>
+                                    <FontAwesomeIconView glyphName="FOLDER_OPEN" glyphStyle="-fx-fill: #ecf0f1;" size="20px" />
+                                </graphic>
+                                <HBox.margin>
+                                    <Insets bottom="2.0" left="2.0" right="6.0" top="2.0" />
+                                </HBox.margin>
+                                <font>
+                                    <Font size="13.0" />
+                                </font>
+                                <HBox.margin>
+                                    <Insets />
+                                </HBox.margin>
+                                <padding>
+                                    <Insets left="2.0" />
+                                </padding>
+                            </JFXButton>
+                        </children>
+                        <VBox.margin>
+                            <Insets left="5.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                            <FontAwesomeIconView glyphName="GEAR" glyphStyle="-fx-fill: #ecf0f1;" size="20">
+                                <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                </HBox.margin>
+                            </FontAwesomeIconView>
+                            <Label text="%gui.import_settings" textFill="#ecf0f1" HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets top="8.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <VBox spacing="10.0">
+                        <children>
+                            <JFXCheckBox fx:id="cbImportAsSingles" text="%gui.import_as_singles" textFill="WHITE" />
+                            <JFXCheckBox fx:id="cbImportAsSinglesOnlyFromRoot" layoutX="10.0" layoutY="10.0" text="%gui.import_as_singles_from_root" textFill="WHITE" />
+                            <JFXCheckBox fx:id="cbImportAsSinglesIfInRootWithFolders" layoutX="10.0" layoutY="10.0" text="%gui.import_as_singles_if_in_root_with_folders" textFill="WHITE" />
+                        </children>
+                        <VBox.margin>
+                            <Insets left="5.0" right="5.0" top="5.0" />
+                        </VBox.margin>
+                    </VBox>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            </VBox>
+        </center>
+        <bottom>
+            <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #2D2D2D;" spacing="10.0" BorderPane.alignment="CENTER">
+                <children>
+                    <JFXButton onAction="#closeDialog" styleClass="transparent-button-header" text="%gui.cancel" />
+                    <JFXButton onAction="#save" styleClass="default-button-header" text="%gui.save">
+                        <graphic>
+                            <MaterialDesignIconView glyphName="FLOPPY" glyphStyle="-fx-fill: #ecf0f1;" size="17" />
+                        </graphic>
+                    </JFXButton>
+                </children>
+                <padding>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

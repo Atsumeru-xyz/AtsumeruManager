@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.StatusBar?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="container" prefHeight="600.0" prefWidth="1100.0"
+           xmlns="http://javafx.com/javafx/11.0.14-internal"
+           fx:controller="xyz.atsumeru.manager.controller.MainController">
+    <BorderPane prefHeight="600.0" prefWidth="1100.0">
+        <center>
+            <JFXTabPane fx:id="tabPaneMain" side="LEFT"
+                        style="-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; -fx-animated: false"
+                        tabClosingPolicy="ALL_TABS" />
+        </center>
+        <bottom>
+            <HBox alignment="CENTER_RIGHT" maxHeight="10" style="-fx-background-color: #2D2D2D;"
+                  BorderPane.alignment="CENTER">
+                <StatusBar fx:id="statusBar" style="-fx-background-color: #2D2D2D;" text="" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets top="5.0"/>
+                    </HBox.margin>
+                </StatusBar>
+            </HBox>
+        </bottom>
+    </BorderPane>
+    <StackPane fx:id="opaqueLayer" style="-fx-background-color: #00000055;" visible="false" managed="false"/>
+</StackPane>

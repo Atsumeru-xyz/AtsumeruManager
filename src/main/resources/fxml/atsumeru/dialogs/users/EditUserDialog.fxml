@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.users.EditUserDialogController">
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #2D2D2D;" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton onAction="#closeDialog" styleClass="transparent-button-header" text="%gui.cancel" />
+                <JFXButton onAction="#save" styleClass="default-button-header" text="%gui.save">
+                    <graphic>
+                        <MaterialDesignIconView glyphName="FLOPPY" glyphStyle="-fx-fill: #ecf0f1;" size="17" />
+                    </graphic>
+                </JFXButton>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+            <content>
+                <VBox fx:id="container" spacing="10.0">
+                    <padding>
+                        <Insets bottom="10.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                    <children>
+                        <JFXTextField fx:id="tfUserName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="%atsumeru.user_name" style="-fx-text-fill: #ecf0f1;" unFocusColor="#1b1d1f00">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="tfUserPassword" layoutX="20.0" layoutY="114.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="%atsumeru.password" style="-fx-text-fill: #ecf0f1;" unFocusColor="#1b1d1f00">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </JFXPasswordField>
+                        <VBox fx:id="vbRoles">
+                            <children>
+                                <Label text="%atsumeru.roles">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="vbAuthorities">
+                            <children>
+                                <Label text="%atsumeru.authorities">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="vbCategoriesAccess" layoutX="26.0" layoutY="206.0">
+                            <children>
+                                <Label text="%atsumeru.categories_access">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Label text="%atsumeru.disallowed_genres">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <FlowPane fx:id="fpGenres" alignment="CENTER_LEFT" hgap="6" vgap="6" />
+                        <Label text="%atsumeru.disallowed_tags">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXTextField fx:id="tfTags" focusColor="#B5305F" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText="%gui.prompt.separate_by_comma" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="8.0" />
+                            </GridPane.margin>
+                        </JFXTextField>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

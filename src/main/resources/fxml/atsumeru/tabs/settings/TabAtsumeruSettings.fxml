@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.SegmentedButton?>
+<BorderPane fx:id="container" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #2D2D2D;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.tabs.settings.TabAtsumeruSettingsController">
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: #2d2d2d;" BorderPane.alignment="CENTER">
+            <content>
+                <VBox style="-fx-background-color: #2d2d2d;">
+                    <children>
+                        <VBox spacing="8.0">
+                            <children>
+                                <!-- Servers List -->
+                                <HBox>
+                                    <children>
+                                        <Label text="%atsumeru.servers" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                        <JFXButton fx:id="btnAddServer" alignment="CENTER" graphicTextGap="0.0" ripplerFill="WHITE" styleClass="border-transparent" text="%atsumeru.add_server" textFill="WHITE">
+                                            <graphic>
+                                                <MaterialDesignIconView glyphName="PLUS" glyphStyle="-fx-fill: #ecf0f1;" size="22px" translateX="-6.0" />
+                                            </graphic>
+                                            <font>
+                                                <Font size="16.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="8.0" />
+                                            </HBox.margin>
+                                        </JFXButton>
+                                    </children>
+                                </HBox>
+                                <Label fx:id="lblNoServers" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="%atsumeru.no_servers" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <VBox fx:id="vbServersList" VBox.vgrow="ALWAYS">
+                                    <VBox.margin>
+                                        <Insets left="-8.0" />
+                                    </VBox.margin>
+                                </VBox>
+
+                                <!-- Main Settings -->
+                                <Label text="%gui.settings.main" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.default_language" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <SegmentedButton fx:id="sgAppLanguage" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.app_close_behavior_in_metadata_editor" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <SegmentedButton fx:id="sgAppCloseBehaviorInMetadataEditor" />
+                                    </children>
+                                </HBox>
+
+                                <!-- Appearance -->
+                                <Label layoutX="10.0" layoutY="10.0" text="%gui.settings.appearance" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <HBox fx:id="hbCardCount">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.card_count" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.grid_scale_type" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <SegmentedButton fx:id="sgGridScaleType" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.accent_color" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <JFXButton layoutX="312.0" layoutY="10.0" onAction="#handleAccentColorPick" ripplerFill="WHITE" style="-fx-background-color: -fx-accent-color" text="%gui.folder_management.select" textFill="#ecf0f1">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                            <padding>
+                                                <Insets bottom="6.0" left="10.0" right="10.0" top="6.0" />
+                                            </padding>
+                                        </JFXButton>
+                                    </children>
+                                </HBox>
+
+                                <!-- Administration -->
+                                <Label layoutX="10.0" layoutY="184.0" text="%gui.settings.administration" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <HBox alignment="CENTER" layoutX="10.0" layoutY="227.0">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" text="%gui.settings.disable_progress_sync" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <JFXCheckBox fx:id="cbDisableProgressSync" text=" " textFill="WHITE" />
+                                    </children>
+                                </HBox>
+
+                                <!-- API and Metadata sources -->
+                                <Label fx:id="lblApi" layoutX="10.0" layoutY="184.0" text="%gui.settings.api_and_metadata_sources" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="16.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <HBox fx:id="hbApi" alignment="CENTER" layoutX="10.0" layoutY="227.0">
+                                    <children>
+                                        <Label maxWidth="500.0" text="%gui.settings.comicvine_api_key" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <MFXTextField fx:id="tfComicVineAPIKey" floatMode="BORDER" floatingText="%gui.settings.api_key" maxWidth="1.7976931348623157E308" promptText=" " HBox.hgrow="ALWAYS">
+                                            <font>
+                                                <Font size="15.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" top="16.0" />
+                                            </VBox.margin>
+                                        </MFXTextField>
+                                        <Hyperlink fx:id="hpRequestComicVineAPIKey" onAction="#handleRequestComicVineApiKey" text="%gui.settings.request_key" HBox.hgrow="ALWAYS">
+                                            <HBox.margin>
+                                                <Insets left="16.0" />
+                                            </HBox.margin>
+                                        </Hyperlink>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

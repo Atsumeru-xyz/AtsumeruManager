@@ -1,0 +1,163 @@
+/*******************************************************
+*                           						   *
+* MFXListView                                          *
+*                          							   *
+*******************************************************/
+.mfx-legacy-list-view {
+    -mfx-track-color: #242627;
+    -mfx-thumb-color: #373737;
+    -mfx-thumb-hover-color: #757575;
+}
+
+/*******************************************************
+*                           						   *
+* MFXTextField                                         *
+*                          							   *
+*******************************************************/
+.mfx-text-field {
+    -fx-background-color: #2D2D2D;
+    -fx-background-radius: 5;
+    -fx-border-color: gray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+
+    -fx-font-family: "Open Sans Regular";
+}
+
+.mfx-text-field .text-field {
+    -fx-highlight-fill: -fx-accent-color; /* Selected text highlight */
+    -fx-prompt-text-fill: lightgray; /* Prompt text color */
+    -fx-text-fill: white;
+}
+
+.mfx-text-field:focus-within {
+    -fx-background-insets: 2;
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -0.5;
+}
+
+.mfx-text-field .floating-text {
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: white;
+}
+
+.mfx-text-field:floating .floating-text {
+    -fx-background-color: #2D2D2D;
+}
+
+.mfx-text-field:focus-within .floating-text {
+    -fx-text-fill: white;
+}
+
+/*******************************************************
+*                           						   *
+* MFXContextMenu                                       *
+*                          							   *
+*******************************************************/
+.mfx-context-menu .line-separator {
+    -fx-stroke: #e1e1e1;
+    -fx-stroke-width: 0.5;
+}
+
+.mfx-context-menu .mfx-scroll-pane {
+    -fx-background-color: #242627;
+    -fx-background-radius: 5;
+    -fx-background-insets: 1;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-max-height: 500;
+}
+
+.mfx-context-menu .mfx-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/*******************************************************
+*                           						   *
+* MFXContextMenuItem                                   *
+*                          							   *
+*******************************************************/
+.mfx-menu-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-min-height: 24;
+    -fx-padding: 0 2 0 2;
+
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: -fx-color-primary-text;
+}
+
+.mfx-menu-item:hover {
+    -fx-background-color: #373737;
+}
+
+.mfx-menu-item .label {
+    -fx-padding: 7 0 7 -7;
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: -fx-color-primary-text;
+}
+
+.mfx-menu-item .label .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.mfx-menu-item .accelerator {
+    -fx-padding: 0 5 0 15;
+}
+
+.mfx-menu-item:disabled .mfx-font-icon {
+    -mfx-color: #bcbcbc;
+}
+
+/*******************************************************
+*                           						   *
+* MFXComboBox                                          *
+*                          							   *
+*******************************************************/
+.mfx-combo-box {
+    -fx-padding: 3 5 3 5;
+}
+
+.mfx-combo-box .caret .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(0, 133, 62, 0.3);
+    -mfx-ripple-radius: 14;
+}
+
+.mfx-combo-box:focus-within .caret .mfx-font-icon {
+    -mfx-color: -fx-accent-color;
+}
+
+.mfx-combo-box .combo-popup .virtual-flow {
+    -fx-background-radius: 5;
+    -fx-background-color: #242627;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-min-height: 250;
+    -fx-max-height: 350;
+}
+
+/*******************************************************
+*                           						   *
+* MFXComboBoxCell                                      *
+*                          							   *
+*******************************************************/
+.mfx-combo-box-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.mfx-combo-box-cell:hover {
+    -fx-background-color: rgba(0, 133, 62, 0.3);
+}
+
+.mfx-combo-box-cell:selected {
+    -fx-background-color: rgba(0, 133, 62, 0.5);
+}
+
+.mfx-combo-box-cell .data-label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: -fx-color-primary-text;
+}

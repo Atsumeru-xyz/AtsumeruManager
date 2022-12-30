@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<fx:root alignment="CENTER_LEFT" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <JFXCheckBox fx:id="chbCategory" maxWidth="1.7976931348623157E308" mnemonicParsing="false" textFill="WHITE" HBox.hgrow="ALWAYS">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </JFXCheckBox>
+    <JFXButton fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+        <graphic>
+            <MaterialDesignIconView glyphName="PENCIL" glyphStyle="-fx-fill: #ecf0f1;" size="22px" />
+        </graphic>
+        <HBox.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+        </HBox.margin>
+        <font>
+            <Font size="13.0" />
+        </font>
+        <padding>
+            <Insets bottom="4.0" top="4.0" />
+        </padding>
+    </JFXButton>
+    <JFXButton fx:id="btnDelete" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE" styleClass="border-transparent" text=" " textFill="WHITE">
+        <graphic>
+            <MaterialDesignIconView glyphName="DELETE" glyphStyle="-fx-fill: #ecf0f1;" size="22px" />
+        </graphic>
+        <HBox.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+        </HBox.margin>
+        <font>
+            <Font size="13.0" />
+        </font>
+        <padding>
+            <Insets bottom="4.0" top="4.0" />
+        </padding>
+    </JFXButton>
+</fx:root>

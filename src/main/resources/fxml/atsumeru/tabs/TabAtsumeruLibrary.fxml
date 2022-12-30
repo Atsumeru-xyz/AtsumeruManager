@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import xyz.atsumeru.manager.controls.EmptyView?>
+<?import xyz.atsumeru.manager.controls.ErrorView?>
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.*?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="contentRoot" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+           minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0"
+           stylesheets="@../../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal"
+           fx:controller="xyz.atsumeru.manager.controller.tabs.TabAtsumeruLibraryController">
+    <SplitPane fx:id="contentContainer" dividerPositions="0.81" maxHeight="1.7976931348623157E308"
+               maxWidth="1.7976931348623157E308" style="-fx-background-color: #2d2d2d;" VBox.vgrow="ALWAYS">
+        <BorderPane style="-fx-background-color: #2d2d2d;" prefHeight="200.0" prefWidth="200.0">
+            <center>
+                <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                           BorderPane.alignment="CENTER">
+                    <children>
+                        <StackPane fx:id="spGridHolder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                   BorderPane.alignment="CENTER"/>
+                        <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity"
+                                            minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0"
+                                            prefWidth="50.0" startingAngle="-120.0"/>
+                        <EmptyView fx:id="vbEmptyView"/>
+                        <ErrorView fx:id="vbErrorView"/>
+                    </children>
+                </StackPane>
+            </center>
+            <bottom>
+                <VBox BorderPane.alignment="CENTER">
+                    <Pane minHeight="6.0" style="-fx-background-color: #373737;"/>
+                    <HBox fx:id="hbTabs" style="-fx-background-color: #2d2d2d;" minHeight="40" maxWidth="1.7976931348623157E308" spacing="6.0" VBox.vgrow="ALWAYS">
+                        <TabPane fx:id="tpLibraryTabs" side="BOTTOM"
+                                 style="-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE; -fx-animated: false"
+                                 tabClosingPolicy="UNAVAILABLE" tabDragPolicy="REORDER" BorderPane.alignment="CENTER"
+                                 HBox.hgrow="ALWAYS"/>
+                        <JFXButton fx:id="btnReload" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0"
+                                   minWidth="36.0" onAction="#handleReloadButtonAction" ripplerFill="WHITE"
+                                   styleClass="border-transparent" text=" " textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="REFRESH" glyphStyle="-fx-fill: #ecf0f1;"
+                                                        size="24px"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="%gui.update"/>
+                            </tooltip>
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="4.0" top="4.0"/>
+                            </padding>
+                        </JFXButton>
+                        <JFXButton fx:id="btnListCategories" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0"
+                                   minWidth="36.0" onAction="#handleListCategoriesButtonAction" ripplerFill="WHITE"
+                                   styleClass="border-transparent" text=" " textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="ARROW_UP_DROP_CIRCLE" glyphStyle="-fx-fill: #ecf0f1;"
+                                                        size="22px"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="%gui.library_list_categories"/>
+                            </tooltip>
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="4.0" top="4.0"/>
+                            </padding>
+                        </JFXButton>
+                        <JFXButton fx:id="btnLockCategories" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0"
+                                   minWidth="36.0" onAction="#handleLockCategoriesButtonAction" ripplerFill="WHITE"
+                                   styleClass="border-transparent" text=" " textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView fx:id="mdivLockCategories" glyphName="LOCK"
+                                                        glyphStyle="-fx-fill: #ecf0f1;" size="22px"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="%gui.library_categories_editor"/>
+                            </tooltip>
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="4.0" top="4.0"/>
+                            </padding>
+                            <HBox.margin>
+                                <Insets right="10.0"/>
+                            </HBox.margin>
+                        </JFXButton>
+                    </HBox>
+                    <VBox style="-fx-background-color: #2d2d2d;">
+                        <children>
+                            <HBox VBox.vgrow="ALWAYS">
+                                <children>
+                                    <HBox fx:id="hbSearch" alignment="CENTER_LEFT" styleClass="border-colored-slim"
+                                          HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ecf0f1;"
+                                                                 size="20">
+                                                <HBox.margin>
+                                                    <Insets left="8.0" right="5.0"/>
+                                                </HBox.margin>
+                                            </FontAwesomeIconView>
+                                            <JFXTextField fx:id="tfSearch" focusColor="#2b2b2b00" maxHeight="36.0"
+                                                          minHeight="36.0" promptText="%gui.search_ellipsize"
+                                                          style="-fx-text-fill: #F2F0EC;" unFocusColor="#2b2b2b00"
+                                                          HBox.hgrow="ALWAYS">
+                                                <font>
+                                                    <Font size="17.0"/>
+                                                </font>
+                                                <HBox.margin>
+                                                    <Insets/>
+                                                </HBox.margin>
+                                            </JFXTextField>
+                                            <JFXButton fx:id="btnSortOrder" alignment="CENTER"
+                                                       contentDisplay="GRAPHIC_ONLY" layoutX="319.0" layoutY="11.0"
+                                                       onAction="#handleReversedSortButtonAction" prefHeight="36.0"
+                                                       ripplerFill="WHITE" styleClass="border-transparent"
+                                                       textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView fx:id="mdivSortOrder"
+                                                                            glyphName="SORT_ASCENDING"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <padding>
+                                                    <Insets bottom="4.0" left="4.0" right="8.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnSort" alignment="CENTER" layoutX="319.0" layoutY="11.0"
+                                                       onAction="#handleSortButtonAction" prefHeight="36.0"
+                                                       ripplerFill="WHITE" styleClass="border-transparent" text="???"
+                                                       textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView fx:id="mdivSort" glyphName="SORT"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <font>
+                                                    <Font name="System Bold" size="14.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" left="4.0" right="8.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnServers" alignment="CENTER" layoutX="10.0"
+                                                       layoutY="11.0" onAction="#handleServersButtonAction"
+                                                       prefHeight="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text="???" textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView glyphName="SERVER_NETWORK"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <font>
+                                                    <Font name="System Bold" size="14.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" left="4.0" right="8.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                        </children>
+                                        <HBox.margin>
+                                            <Insets right="8.0"/>
+                                        </HBox.margin>
+                                    </HBox>
+                                    <HBox fx:id="hboxNavigation" alignment="CENTER" spacing="6.0">
+                                        <children>
+                                            <JFXButton fx:id="btnUsers" alignment="CENTER" contentDisplay="CENTER"
+                                                       layoutX="10.0" layoutY="11.0" onAction="#handleUsersButtonAction"
+                                                       prefHeight="36.0" prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView glyphName="ACCOUNT"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip text="%atsumeru.users_management"/>
+                                                </tooltip>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnImport" alignment="CENTER" contentDisplay="CENTER"
+                                                       layoutX="118.0" layoutY="12.0"
+                                                       onAction="#handleImportButtonAction" prefHeight="36.0"
+                                                       prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView glyphName="FILE_IMPORT"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip text="%atsumeru.import"/>
+                                                </tooltip>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnCategories" alignment="CENTER" contentDisplay="CENTER"
+                                                       layoutX="10.0" layoutY="11.0"
+                                                       onAction="#handleCategoriesButtonAction" prefHeight="36.0"
+                                                       prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView glyphName="TAG"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip text="%gui.library_categories_editor"/>
+                                                </tooltip>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnAdmin" alignment="CENTER" contentDisplay="CENTER"
+                                                       layoutX="131.0" layoutY="11.0"
+                                                       onAction="#handleAdminButtonAction" prefHeight="36.0"
+                                                       prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <FontAwesomeIconView glyphName="BUG"
+                                                                         glyphStyle="-fx-fill: #ecf0f1;" size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip text="%gui.admin_functions"/>
+                                                </tooltip>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnFilters" alignment="CENTER" contentDisplay="CENTER"
+                                                       layoutX="10.0" layoutY="11.0"
+                                                       onAction="#handleFiltersButtonAction" prefHeight="36.0"
+                                                       prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView fx:id="ivFilters" glyphName="FILTER_REMOVE"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip fx:id="btnFiltersTooltip" text="%gui.show_filters"/>
+                                                </tooltip>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                            <JFXButton fx:id="btnSettings" alignment="CENTER" contentDisplay="CENTER"
+                                                       onAction="#handleSettingsButtonAction" prefHeight="36.0"
+                                                       prefWidth="36.0" ripplerFill="WHITE"
+                                                       styleClass="border-transparent" text=" " textFill="WHITE">
+                                                <graphic>
+                                                    <MaterialDesignIconView glyphName="SETTINGS"
+                                                                            glyphStyle="-fx-fill: #ecf0f1;"
+                                                                            size="22px"/>
+                                                </graphic>
+                                                <tooltip>
+                                                    <Tooltip text="%atsumeru.server_settings"/>
+                                                </tooltip>
+                                                <HBox.margin>
+                                                    <Insets/>
+                                                </HBox.margin>
+                                                <font>
+                                                    <Font size="13.0"/>
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="4.0" top="4.0"/>
+                                                </padding>
+                                            </JFXButton>
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </HBox>
+                        </children>
+                        <padding>
+                            <Insets bottom="6.0" left="6.0" right="10.0" top="6.0"/>
+                        </padding>
+                    </VBox>
+                </VBox>
+            </bottom>
+            <top>
+                <HBox fx:id="hbActionBar" alignment="CENTER_RIGHT" spacing="6.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <JFXButton fx:id="btnChangeCategory" layoutX="390.0" layoutY="16.0" ripplerFill="WHITE"
+                                   styleClass="border-transparent" text="%gui.button.change_category" textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="TAG" glyphStyle="-fx-fill: #ecf0f1;" size="17"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnSelectAll" layoutX="16.0" layoutY="16.0" ripplerFill="WHITE"
+                                   styleClass="border-transparent" text="%context.select_all" textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="SELECT_ALL" glyphStyle="-fx-fill: #ecf0f1;"
+                                                        size="17"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnClearSelection" ripplerFill="WHITE" styleClass="border-transparent"
+                                   text="%context.clear_selection" textFill="WHITE">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="SELECT_OFF" glyphStyle="-fx-fill: #ecf0f1;"
+                                                        size="17"/>
+                            </graphic>
+                        </JFXButton>
+                    </children>
+                    <padding>
+                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+                    </padding>
+                </HBox>
+            </top>
+        </BorderPane>
+        <StackPane fx:id="paneFilters" minWidth="195.0" prefHeight="150.0" prefWidth="210.0"
+                   SplitPane.resizableWithParent="false" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="210.0">
+                    <children>
+                        <JFXTreeView fx:id="tvFilters" onMouseClicked="#handleTreeViewMouseClick" prefWidth="210.0"
+                                     style="-fx-background-color: #2d2d2d;" styleClass="tree-filter"
+                                     VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets top="5.0"/>
+                            </VBox.margin>
+                        </JFXTreeView>
+                        <Pane minHeight="6.0" style="-fx-background-color: #373737;"/>
+                        <JFXButton fx:id="btnClearFilters" alignment="CENTER" layoutX="10.0" layoutY="11.0"
+                                   maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="38.0"
+                                   ripplerFill="WHITE" styleClass="border-transparent" text="%gui.filters.reset"
+                                   textFill="WHITE" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialDesignIconView glyphName="DELETE_SWEEP" glyphStyle="-fx-fill: #ecf0f1;"
+                                                        size="24px"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="%gui.filters.reset"/>
+                            </tooltip>
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                            <padding>
+                                <Insets bottom="4.0" left="6.0" right="6.0" top="4.0"/>
+                            </padding>
+                            <VBox.margin>
+                                <Insets left="6.0" right="6.0" top="2.0"/>
+                            </VBox.margin>
+                        </JFXButton>
+                        <HBox alignment="CENTER_LEFT" styleClass="border-colored-slim" HBox.hgrow="ALWAYS">
+                            <children>
+                                <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: #ecf0f1;" size="20">
+                                    <HBox.margin>
+                                        <Insets left="8.0" right="5.0"/>
+                                    </HBox.margin>
+                                </FontAwesomeIconView>
+                                <JFXTextField fx:id="tfFilterSearch" focusColor="#2b2b2b00" maxHeight="36.0"
+                                              minHeight="36.0" promptText="%gui.search_filters"
+                                              style="-fx-text-fill: #F2F0EC;" unFocusColor="#2b2b2b00"
+                                              HBox.hgrow="ALWAYS">
+                                    <font>
+                                        <Font size="17.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets/>
+                                    </HBox.margin>
+                                </JFXTextField>
+                            </children>
+                            <HBox.margin>
+                                <Insets right="8.0"/>
+                            </HBox.margin>
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </VBox.margin>
+        </StackPane>
+    </SplitPane>
+</StackPane>

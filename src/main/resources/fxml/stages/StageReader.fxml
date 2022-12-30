@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.materialdesignicons.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="container" alignment="TOP_CENTER" stylesheets="@../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.stages.StageReaderController">
+    <MenuBar fx:id="menuBar" style="-fx-background-color: #2d2d2d;">
+        <Menu text="%gui.reader.menu_file">
+            <MenuItem onAction="#showConfigStage" text="%gui.tooltip.settings" />
+            <SeparatorMenuItem />
+            <MenuItem id="exitButton" onAction="#exit" text="%gui.exit" />
+        </Menu>
+        <Menu text="%gui.reader.menu_view">
+<!--            <CheckMenuItem fx:id="nightModeItem" onAction="#toggleNightMode" text="Night Mode" />-->
+            <CheckMenuItem fx:id="fullscreenItem" onAction="#toggleFullscreen" text="Fullscreen" />
+            <CheckMenuItem fx:id="showNavBarItem" onAction="#toggleNavBar" selected="true" text="%gui.reader.show_navbar" />
+            <Menu text="%gui.reader.menu_zoom">
+                <fx:define>
+                    <ToggleGroup fx:id="zoomTypeGroup" />
+                </fx:define>
+                <RadioMenuItem fx:id="fitAutoRadio" onAction="#updateImageViewFit" selected="true" text="%gui.reader.auto_fit" />
+                <RadioMenuItem fx:id="fitHeightRadio" onAction="#updateImageViewFit" text="%gui.reader.fit_height" />
+                <RadioMenuItem fx:id="fitWidthRadio" onAction="#updateImageViewFit" text="%gui.reader.fit_width">
+               <toggleGroup>
+                  <ToggleGroup fx:id="zoomTypeGroup" />
+               </toggleGroup></RadioMenuItem>
+                <RadioMenuItem fx:id="actualSizeRadio" onAction="#updateImageViewFit" text="%gui.reader.actual_size" toggleGroup="$zoomTypeGroup" />
+            </Menu>
+        </Menu>
+    </MenuBar>
+
+    <StackPane fx:id="stackPane" style="-fx-background-color: #2d2d2d;">
+        <ScrollPane fx:id="imageScrollPane" styleClass="container">
+            <StackPane>
+                <ImageView fx:id="imageViewSingle" preserveRatio="true" />
+            </StackPane>
+        </ScrollPane>
+        <MFXProgressSpinner fx:id="imageProgressIndicator" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" visible="false" />
+        <HBox alignment="CENTER" managed="false" visible="false" StackPane.alignment="CENTER">
+            <Label fx:id="errorText" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white;" text="%gui.reader.error_occurred" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <font>
+               <Font size="13.0" />
+            </font></Label>
+        </HBox>
+    </StackPane>
+
+    <HBox fx:id="navContainer" maxWidth="Infinity" style="-fx-background-color: #1D1F21;">
+        <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+        </padding>
+        <HBox fx:id="navLeftContainer" alignment="CENTER_LEFT">
+         <JFXButton fx:id="firstPageButton1" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#exit" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text="%gui.reader.close" textFill="WHITE">
+            <HBox.margin>
+               <Insets right="15.0" />
+            </HBox.margin>
+         </JFXButton>
+        </HBox>
+        <HBox fx:id="navCenterContainer" alignment="CENTER" spacing="5" HBox.hgrow="ALWAYS">
+         <JFXButton fx:id="firstPageButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="268.0" layoutY="14.0" onAction="#firstPage" prefHeight="32.0" prefWidth="32.0" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text=" ">
+            <graphic>
+               <MaterialDesignIconView glyphName="SKIP_PREVIOUS" glyphStyle="-fx-fill: #ecf0f1;" size="20px" />
+            </graphic>
+         </JFXButton>
+         <JFXButton fx:id="prevPageButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#leftPage" prefHeight="32.0" prefWidth="32.0" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text=" ">
+            <graphic>
+               <FontAwesomeIconView glyphName="ARROW_LEFT" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+            </graphic>
+         </JFXButton>
+            <TextField fx:id="pageNumField" alignment="CENTER" onAction="#specificPage" prefColumnCount="2" text="1" />
+            <Text fill="WHITE" text="/" />
+            <TextField fx:id="totalPagesField" alignment="CENTER" disable="true" prefColumnCount="2" text="??" />
+         <JFXButton fx:id="nextPageButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="10.0" layoutY="14.0" onAction="#rightPage" prefHeight="32.0" prefWidth="32.0" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text=" ">
+            <graphic>
+               <FontAwesomeIconView glyphName="ARROW_RIGHT" glyphStyle="-fx-fill: #ecf0f1;" size="14px" />
+            </graphic>
+         </JFXButton>
+         <JFXButton fx:id="lastPageButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="55.0" layoutY="14.0" onAction="#lastPage" prefHeight="32.0" prefWidth="32.0" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text=" ">
+            <graphic>
+               <MaterialDesignIconView glyphName="SKIP_NEXT" glyphStyle="-fx-fill: #ecf0f1;" size="20px" />
+            </graphic>
+         </JFXButton>
+        </HBox>
+        <HBox fx:id="navRightContainer" alignment="CENTER_RIGHT" spacing="5">
+         <JFXButton fx:id="prevChapterButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#previousChapter" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text="%gui.reader.previous_chapter" textFill="WHITE">
+            <HBox.margin>
+               <Insets left="15.0" />
+            </HBox.margin>
+         </JFXButton>
+         <JFXButton fx:id="nextChapterButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="10.0" layoutY="14.0" onAction="#nextChapter" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text="%gui.reader.next_chapter" textFill="WHITE" />
+        </HBox>
+    </HBox>
+</VBox>

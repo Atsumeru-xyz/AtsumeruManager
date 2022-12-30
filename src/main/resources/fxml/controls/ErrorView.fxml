@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<fx:root fx:id="vbErrorView" alignment="CENTER" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.14-internal">
+    <children>
+        <ImageView fx:id="ivErrorImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/errors/error_view_cloud.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="lblErrorTitle" text="%gui.error.title" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+            <VBox.margin>
+                <Insets left="100.0" right="100.0" top="15.0" />
+            </VBox.margin>
+        </Label>
+        <Label fx:id="lblErrorSubtitle" text="%gui.error.subtitle" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets left="100.0" right="100.0" />
+            </VBox.margin>
+        </Label>
+        <Label fx:id="lblErrorException" text="Exception: NullPointerException" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets left="100.0" right="100.0" top="10.0" />
+            </VBox.margin>
+        </Label>
+        <JFXButton fx:id="btnErrorRetry" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" ripplerFill="WHITE" styleClass="button-colored" text="%gui.error.retry" textAlignment="CENTER" textFill="WHITE">
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+            <font>
+                <Font size="13.0" />
+            </font>
+        </JFXButton>
+        <JFXButton fx:id="btnErrorOpenInWebView" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="439.0" layoutY="347.0" ripplerFill="WHITE" style="-fx-background-radius: 3;" text="%gui.error.open_in_webview" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font size="13.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="8.0" />
+            </VBox.margin>
+        </JFXButton>
+    </children>
+</fx:root>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" style="-fx-background-color: #2D2D2D;" stylesheets="@../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.fragments.DetailsInfoFragmentController">
+    <children>
+        <MFXProgressSpinner fx:id="spinnerLoading" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" startingAngle="-120.0" />
+        <ScrollPane fx:id="spInfo" fitToWidth="true" hbarPolicy="NEVER">
+            <content>
+                <VBox fx:id="vbInfo" style="-fx-background-color: #2d2d2d;">
+                    <children>
+                        <Label fx:id="lblTitle" text="Mahou Shoujo Madoka★Magica">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblAltTitle" layoutX="10.0" layoutY="10.0" text="Девочка-волшебница Мадока★Волшебство">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="6.0">
+                            <children>
+                                <Label fx:id="lblJapTitle" text="JP: 魔法少女まどか★マギカ">
+                                    <font>
+                                        <Font name="System Italic" size="13.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblKorTitle" layoutX="10.0" layoutY="10.0" text="KOR: 魔法少女まどか★マギカ">
+                                    <font>
+                                        <Font name="System Italic" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox fillHeight="false">
+                            <children>
+                                <VBox alignment="TOP_CENTER" spacing="5.0">
+                                    <children>
+                                        <Rectangle fx:id="shContentCover" arcHeight="12" arcWidth="12" fill="#1d1f21" height="208.0" stroke="#1d1f21" strokeType="INSIDE" strokeWidth="0.0" width="150.0" VBox.vgrow="ALWAYS" />
+                                        <HBox alignment="CENTER" spacing="6.0">
+                                            <children>
+                                                <ImageView fx:id="ivAgeRating" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../images/adults_only.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label fx:id="lblContentTypeWithScore" contentDisplay="CENTER" text="Manga • 🟊9.0" textAlignment="CENTER" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <TextFlow fx:id="tfStatus" VBox.vgrow="NEVER">
+                                            <children>
+                                                <Label text="%gui.info_status" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfTranslationStatus" VBox.vgrow="NEVER">
+                                            <children>
+                                                <Label text="%gui.info_translation_status" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <TextFlow fx:id="tfAuthor" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_author" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfArtists" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_artists" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfPublisher" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_publisher" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfCountry" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_country" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfYear" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_year" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfLanguages" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_languages" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfTranslators" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_translators" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfMagazines" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_magazines" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfCharacters" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_characters" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfParodies" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_parodies" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfEvent" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_event" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfCircles" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_circles" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfCensorship" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_censorship" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                        <TextFlow fx:id="tfColor" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label text="%gui.info_color" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets bottom="8.0" left="5.0" right="5.0" />
+                                    </HBox.margin>
+                                    <padding>
+                                        <Insets left="12.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <VBox spacing="5.0">
+                            <children>
+                                <FlowPane fx:id="fpGenres" alignment="CENTER_LEFT" hgap="6" vgap="6">
+                                    <children>
+                                        <ImageView fx:id="ivGenresIcon" fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/icons/round_theater_comedy_white_18.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </FlowPane>
+                                <FlowPane fx:id="fpTags" alignment="CENTER_LEFT" hgap="6" vgap="6">
+                                    <children>
+                                        <ImageView fx:id="ivTagsIcon" fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../images/icons/round_sell_white_18.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </FlowPane>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="8.0" />
+                            </VBox.margin>
+                        </VBox>
+                        <Label fx:id="lblDescriptionHeader" layoutX="10.0" layoutY="534.0" text="%gui.description" textFill="#ecf0f1" wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="16.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label fx:id="lblDescription" maxHeight="300.0" text="Description: Kido Tatsuhiko moved to Tokyo to attend an art school and start his new life. In his new room, there’s a small hole in the wall. At first he can see nothing through the small hole, but one night, through the peeping hole, he saw a girl. That’s how his new life starts." textFill="#ecf0f1" wrapText="true" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets right="8.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+    <padding>
+        <Insets bottom="8.0" left="16.0" top="8.0" />
+    </padding>
+</StackPane>

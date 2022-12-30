@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<StackPane fx:id="root" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" stylesheets="@../../css/theme.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.fragments.ContentFileItemCardController">
+    <Pane fx:id="rippler" />
+    <HBox fx:id="hbRoot" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" HBox.hgrow="ALWAYS">
+        <MaterialDesignIconView fx:id="mdivFileIcon" glyphName="BOOK" glyphStyle="-fx-fill: #ecf0f1;" size="32" HBox.hgrow="NEVER">
+            <HBox.margin>
+                <Insets right="8.0" />
+            </HBox.margin>
+        </MaterialDesignIconView>
+        <VBox fx:id="vbRoot" alignment="CENTER" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets bottom="3.0" top="3.0" />
+            </HBox.margin>
+            <Label fx:id="lblTitle" maxWidth="1.7976931348623157E308" text="Title" textFill="WHITE">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <Label fx:id="lblService" layoutX="10.0" layoutY="30.0" maxWidth="1.7976931348623157E308" text="anilibria" textFill="#dddddd">
+                <font>
+                    <Font size="11.0" />
+                </font>
+            </Label>
+            <Label fx:id="lblProgress" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="1/33" textFill="#dddddd">
+                <font>
+                    <Font size="11.0" />
+                </font>
+            </Label>
+        </VBox>
+        <JFXButton fx:id="btnDownloadOrDelete" alignment="CENTER" buttonType="RAISED" ellipsisString="" graphicTextGap="0.0" prefHeight="30.0" prefWidth="30.0" ripplerFill="#ecf0f1" style="-fx-background-radius: 30; -fx-background-color: #37474F; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 1, 0, 0, 0);">
+            <graphic>
+                <MaterialDesignIconView glyphName="DOWNLOAD" glyphStyle="-fx-fill: #E0E0E0;" size="14" />
+            </graphic>
+            <HBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </HBox.margin>
+        </JFXButton>
+    </HBox>
+</StackPane>
