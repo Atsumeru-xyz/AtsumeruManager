@@ -56,6 +56,8 @@ java -jar --add-opens=javafx.graphics/javafx.css=ALL-UNNAMED --add-opens=javafx.
 ***Note***: it is necessary to launch app with that looooong command. Some dependency libraries doesn't use `Java 9+ Jigsaw` modularization, so it's necessary to provide module opens/exports configuration explicitly
 
 ### WebApp
+***Warning***: for launching on `Linux`, check [PREPARING LINUX FOR JPRO](https://www.jpro.one/docs/current/2.7/PREPARING_LINUX_FOR_JPRO) page first!
+
 - Install `JRE`/`JDK 11+` as default Java in your system
 - Make sure to set variable `JAVA_PATH` to installed `JRE`/`JDK 11+`
 - Download `WebApp` zip-file from [Releases](https://github.com/AtsumeruDev/AtsumeruManager/releases) section
