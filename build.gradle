@@ -102,7 +102,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // AnnotationsProcessors
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
     compileOnly 'org.jetbrains:annotations:20.1.0'
 
     // SubstrateVM features
