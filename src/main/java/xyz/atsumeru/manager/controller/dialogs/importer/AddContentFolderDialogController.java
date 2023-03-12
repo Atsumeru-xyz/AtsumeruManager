@@ -28,6 +28,8 @@ public class AddContentFolderDialogController extends BaseDialogController<Folde
     @FXML
     JFXCheckBox cbImportAsSinglesIfInRootWithFolders;
     @FXML
+    JFXCheckBox cbIgnoreVolumeNumbersDetection;
+    @FXML
     JFXButton btnSelectFolder;
 
     @Setter
@@ -76,6 +78,7 @@ public class AddContentFolderDialogController extends BaseDialogController<Folde
             folderProperty.setSingles(cbImportAsSingles.isSelected());
             folderProperty.setSinglesInRoot(cbImportAsSinglesOnlyFromRoot.isSelected());
             folderProperty.setSinglesIfInRootWithFolders(cbImportAsSinglesIfInRootWithFolders.isSelected());
+            folderProperty.setIgnoreVolumeNumbersDetection(cbIgnoreVolumeNumbersDetection.isSelected());
             folderProperty.setSeriesCount(Long.MIN_VALUE);
             folderProperty.setSinglesCount(Long.MIN_VALUE);
             folderProperty.setArchivesCount(Long.MIN_VALUE);

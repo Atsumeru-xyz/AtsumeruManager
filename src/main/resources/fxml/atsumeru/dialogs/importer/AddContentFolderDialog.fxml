@@ -80,6 +80,7 @@
                             <JFXCheckBox fx:id="cbImportAsSingles" text="%gui.import_as_singles" textFill="WHITE" />
                             <JFXCheckBox fx:id="cbImportAsSinglesOnlyFromRoot" layoutX="10.0" layoutY="10.0" text="%gui.import_as_singles_from_root" textFill="WHITE" />
                             <JFXCheckBox fx:id="cbImportAsSinglesIfInRootWithFolders" layoutX="10.0" layoutY="10.0" text="%gui.import_as_singles_if_in_root_with_folders" textFill="WHITE" />
+                            <JFXCheckBox fx:id="cbIgnoreVolumeNumbersDetection" layoutX="10.0" layoutY="10.0" text="%gui.ignore_volume_numbers_detection" textFill="WHITE" />
                         </children>
                         <VBox.margin>
                             <Insets left="5.0" right="5.0" top="5.0" />
