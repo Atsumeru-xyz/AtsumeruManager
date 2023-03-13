@@ -134,7 +134,7 @@ public class ViewUtils {
     }
 
     public static void addAppIconToStage(Stage stage) {
-        stage.getIcons().add(new Image("/images/icons/" + BuildProps.getAppIconName() + ".png"));
+        stage.getIcons().add(new Image("/images/" + BuildProps.getAppIconName() + ".png"));
     }
 
     public static void addStylesheetToScene(Scene scene) {
