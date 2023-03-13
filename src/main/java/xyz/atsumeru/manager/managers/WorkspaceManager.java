@@ -56,7 +56,7 @@ public class WorkspaceManager {
     private static void unpackLibrary(String libraryPath) {
         File libraryFile = new File(getWorkingDir() + new File(libraryPath).getName());
         if (!GUFile.isFileExist(libraryFile)) {
-            try (InputStream is = WorkspaceManager.class.getResourceAsStream(libraryPath);
+            try (InputStream is = WorkspaceManager.class.getClassLoader().getResourceAsStream(libraryPath);
                  OutputStream out = new FileOutputStream(libraryFile)) {
                 IOUtils.copy(is, out);
             } catch (Throwable ex) {
