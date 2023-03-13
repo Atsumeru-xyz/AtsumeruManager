@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import kotlin.Pair;
 import lombok.Setter;
 import xyz.atsumeru.manager.FXApplication;
 import xyz.atsumeru.manager.callback.ChapterReadProgressCallback;
@@ -110,32 +112,28 @@ public class StageReaderController extends BaseController {
 
     public static void showReader(String contentName, List<List<Chapter>> chapters, Chapter chapter, ChapterReadProgressCallback callback) {
         if (INSTANCE == null) {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(FXApplication.getResource("/fxml/stages/StageReader.fxml"), LocaleManager.getResourceBundle());
-                Parent layout = fxmlLoader.load();
+            Pair<Node, StageReaderController> pair = FXUtils.loadFXML("/fxml/stages/StageReader.fxml");
+            Parent layout = (Parent) pair.getFirst();
 
-                Stage stage = new Stage();
-                ViewUtils.addAppIconToStage(stage);
+            Stage stage = ViewUtils.createStageWithAppIcon();
 
-                Scene scene = WebAPI.isBrowser()
-                        ? ViewUtils.createScene(stage, StageStyle.UNDECORATED, layout, 1053, 650)
-                        : ViewUtils.createDecoratedScene(stage, layout, 1053, 650);
+            Scene scene = WebAPI.isBrowser()
+                    ? ViewUtils.createScene(stage, StageStyle.UNDECORATED, layout, 1053, 650)
+                    : ViewUtils.createDecoratedScene(stage, layout, 1053, 650);
 
-                INSTANCE = fxmlLoader.getController();
-                INSTANCE.setScene(scene);
-                INSTANCE.setContentName(contentName);
-                INSTANCE.setChapters(chapters);
-                INSTANCE.setChapter(chapter);
-                INSTANCE.setCallback(callback);
+            INSTANCE = pair.getSecond();
+            INSTANCE.setScene(scene);
+            INSTANCE.setContentName(contentName);
+            INSTANCE.setChapters(chapters);
+            INSTANCE.setChapter(chapter);
+            INSTANCE.setCallback(callback);
 
-                ViewUtils.addStylesheetToSceneWithAccent(scene, layout, Settings.getAppAccentColor());
+            ViewUtils.addStylesheetToSceneWithAccent(scene, layout, Settings.getAppAccentColor());
 
-                stage.setScene(scene);
-                FXUtils.showStage(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.err.println("Failed to create new Window");
-            }
+            stage.setScene(scene);
+            FXUtils.showStage(stage);
+
+            INSTANCE.onShow();
         } else {
             INSTANCE.setContentName(contentName);
             INSTANCE.setChapters(chapters);
@@ -181,7 +179,9 @@ public class StageReaderController extends BaseController {
 
         // properly size the ImageView based on default fit setting
         updateImageViewFit();
+    }
 
+    private void onShow() {
         Platform.runLater(() -> {
             FXUtils.setOnHiding(scene, event -> onMadeInactive());
             FXUtils.requestFocus(stackPane);
