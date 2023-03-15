@@ -39,6 +39,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import kotlin.Pair;
 import lombok.Getter;
@@ -294,6 +296,14 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
     BooleanProperty isShowSaveTypeCheckboxes = new SimpleBooleanProperty(true);
 
     public static void createAndShow(@Nullable Serie serie, ChangeListener<Serie> changeListener, boolean isSerie, @Nullable OnContentEditCallback callback) {
+        if (WebAPI.isBrowser()) {
+            showAsInnerDialog(serie, changeListener, isSerie, callback);
+        } else {
+            showAsNewWindowDialog(serie, isSerie, callback);
+        }
+    }
+
+    private static void showAsInnerDialog(@Nullable Serie serie, ChangeListener<Serie> changeListener, boolean isSerie, @Nullable OnContentEditCallback callback) {
         Pair<Node, ContentEditDialogController> pair = FXUtils.loadFXML("/fxml/atsumeru/dialogs/ContentEditDialog.fxml");
         ContentEditDialogController controller = pair.getSecond();
         controller.setDialogMode(true);
@@ -302,6 +312,31 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         controller.setCallback(callback);
 
         controller.show(serie, LocaleManager.getString("gui.metadata_editor"), pair.getFirst(), changeListener);
+    }
+
+    private static void showAsNewWindowDialog(@Nullable Serie serie, boolean isSerie, @Nullable OnContentEditCallback callback) {
+        FXApplication.dimContent(true);
+        Pair<Stage, ContentEditDialogController> pair = ViewUtils.createDialog(
+                "/fxml/atsumeru/dialogs/ContentEditDialog.fxml",
+                LocaleManager.getString("gui.metadata_editor"),
+                Modality.WINDOW_MODAL,
+                false,
+                false,
+                true,
+                true,
+                1250,
+                795,
+                null
+        );
+
+        ContentEditDialogController controller = pair.getSecond();
+        controller.setDialogMode(true);
+        controller.setSerie(isSerie);
+        controller.setContent(serie);
+        controller.setCallback(callback);
+
+        pair.getFirst().showAndWait();
+        FXApplication.dimContent(false);
     }
 
     public void setData(Serie serie, boolean isSerie) {
@@ -1261,6 +1296,6 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
 
     @Override
     protected int minDialogWidth() {
-        return 1400;
+        return 1200;
     }
 }
