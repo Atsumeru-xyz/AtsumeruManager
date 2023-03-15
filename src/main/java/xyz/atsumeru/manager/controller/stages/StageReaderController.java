@@ -8,15 +8,12 @@ import io.reactivex.schedulers.Schedulers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -29,7 +26,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import kotlin.Pair;
 import lombok.Setter;
-import xyz.atsumeru.manager.FXApplication;
 import xyz.atsumeru.manager.callback.ChapterReadProgressCallback;
 import xyz.atsumeru.manager.controller.BaseController;
 import xyz.atsumeru.manager.helpers.LocaleManager;
@@ -45,6 +41,7 @@ import xyz.atsumeru.manager.views.Snackbar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class StageReaderController extends BaseController {
     public static final int VSCROLLBAR_WIDTH = 20;
@@ -86,9 +83,6 @@ public class StageReaderController extends BaseController {
     private Button nextChapterButton;
     @FXML
     private CheckMenuItem showNavBarItem;
-    // TODO: 13.01.2021
-//    @FXML
-//    private CheckMenuItem nightModeItem;
     @FXML
     private CheckMenuItem fullscreenItem;
     @FXML
@@ -108,7 +102,9 @@ public class StageReaderController extends BaseController {
     @Setter
     private ChapterReadProgressCallback callback;
     private EventHandler<KeyEvent> keyEventHandler;
-    private ChangeListener imageViewListener;
+    private ChangeListener<Object> imageViewListener;
+
+    private final boolean invertReadingStyle = true;
 
     public static void showReader(String contentName, List<List<Chapter>> chapters, Chapter chapter, ChapterReadProgressCallback callback) {
         if (INSTANCE == null) {
@@ -166,13 +162,8 @@ public class StageReaderController extends BaseController {
         imageScrollPane.minHeightProperty().bind(container.heightProperty().subtract(navContainer.heightProperty()).subtract(menuBar.heightProperty()));
 
         // increase scroll distance on image
-        imageViewSingle.setOnScroll(e -> {
-            // adapted from https://stackoverflow.com/a/40993755
-            double deltaY = e.getDeltaY();
-            double width = imageScrollPane.getContent().getBoundsInLocal().getWidth();
-            double vvalue = imageScrollPane.getVvalue();
-            imageScrollPane.setVvalue(vvalue + -deltaY / width);
-        });
+        ViewUtils.setNodeOnScroll(imageViewSingle, imageScrollPane, 1);
+
         // make pageNumField and totalPagesField grow if the number of pages grows
         totalPagesField.textProperty().addListener((ob, o, n) -> totalPagesField.setPrefColumnCount(totalPagesField.getText().length()));
         pageNumField.textProperty().addListener((ob, o, n) -> pageNumField.setPrefColumnCount(pageNumField.getText().length()));
@@ -220,8 +211,9 @@ public class StageReaderController extends BaseController {
         INSTANCE = null;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void parseChapter() {
-        Single.just(AtsumeruSource.getSource(server))
+        Single.just(Objects.requireNonNull(AtsumeruSource.getSource(server)))
                 .cache()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.io())
@@ -258,18 +250,6 @@ public class StageReaderController extends BaseController {
      * @return a complete KeyEvent EventHandler for the reader page
      */
     private EventHandler<KeyEvent> newKeyEventHandler() {
-        // TODO: 13.01.2021 !!!
-//        Config config = sceneManager.getConfig();
-//
-//        // We account for whether the invert reading style checkbox has been checked by the user
-//        boolean invertReadingStyle = (boolean) config.getValue(Config.Field.INVERT_READING_STYLE);
-        boolean invertReadingStyle = true;
-
-//        KeyCode keyPrevPage = KeyCode.valueOf((String) config.getValue(Config.Field.READER_KEY_PREV_PAGE));
-//        KeyCode keyNextPage = KeyCode.valueOf((String) config.getValue(Config.Field.READER_KEY_NEXT_PAGE));
-//        KeyCode keyFirstPage = KeyCode.valueOf((String) config.getValue(Config.Field.READER_KEY_FIRST_PAGE));
-//        KeyCode keyLastPage = KeyCode.valueOf((String) config.getValue(Config.Field.READER_KEY_LAST_PAGE));
-
         KeyCode keyPrevPage = KeyCode.LEFT;
         KeyCode keyNextPage = KeyCode.RIGHT;
         KeyCode keyFirstPage = KeyCode.UP;
@@ -309,24 +289,11 @@ public class StageReaderController extends BaseController {
                     } else if (event.getCode() == keyLastPage) {
                         lastPage();
                     }
-//                    else if (event.getCode() == keyToSeries) {
-//                        goToSeries();
-//                    }
-                    else if (event.getCode() == KeyCode.ESCAPE) {
-                        setFullscreen(false);
-                    }
                 }
                 event.consume();
             }
         };
     }
-
-    // TODO: 13.01.2021
-//    @Override
-//    public void toggleNightMode() {
-//        super.toggleNightMode();
-//        applyImageFilter();
-//    }
 
     /**
      * Begin loading the image for the current page.
@@ -341,15 +308,6 @@ public class StageReaderController extends BaseController {
             // set text field to current page number
             int currentPageNum = Math.max(chapter.getCurrentPage(), 1);
             pageNumField.setText(Integer.toString(currentPageNum));
-
-            // TODO: 13.01.2021 реализовать!!!
-            // determine how many pages to preload, if any
-//        Config config = sceneManager.getConfig();
-//        boolean restrict_preload_pages =
-//                (boolean) config.getValue(Config.Field.RESTRICT_PRELOAD_PAGES);
-//        int preloadingAmount =
-//                restrict_preload_pages ? (int) config.getValue(Config.Field.PRELOAD_PAGES_AMOUNT)
-//                        : -1;
 
             int preloadingAmount = 3;
             // start the thread to load the page, which will subsequently begin
@@ -375,14 +333,6 @@ public class StageReaderController extends BaseController {
      */
     public void refreshPage() {
         int pageNumber = chapter.getCurrentPage();
-        // enable/disable appropriate navigation buttons
-
-        // TODO: 13.01.2021 реализовать!!!
-//        Config config = sceneManager.getConfig();
-
-        // We account for whether the invert reading style checkbox has been checked by the user
-//        boolean invertReadingStyle = (boolean) config.getValue(Config.Field.INVERT_READING_STYLE);
-        boolean invertReadingStyle = true;
 
         // When invert reading style setting is active, user reads from left to right.
         // Meaning left/prev would go to the next page
@@ -419,7 +369,6 @@ public class StageReaderController extends BaseController {
     }
 
     private void saveHistory() {
-        // TODO: 16.07.2021 files deletion
         int progress = Math.max(chapter.getCurrentPage(), 1);
         int total = chapter.getPagesCount();
         COMMUNICATION_MANAGER.onSaveHistory(chapter, progress, total);
@@ -444,8 +393,9 @@ public class StageReaderController extends BaseController {
      */
     @FXML
     private void firstPage() {
-        chapter.setCurrentPage(1);
-        parseChapter();
+        chapter.setCurrentPage(invertReadingStyle ? chapter.getPagesCount() : 1);
+        loadCurrentPage();
+        saveHistory();
     }
 
     /**
@@ -475,14 +425,6 @@ public class StageReaderController extends BaseController {
      */
     @FXML
     private void leftPage() {
-        // TODO: 13.01.2021 реализовать!!!
-        // Get the current configuration settings
-//        Config config = sceneManager.getConfig();
-
-        // We account for whether the invert reading style checkbox has been checked by the user
-//        boolean invertReadingStyle = (boolean) config.getValue(Config.Field.INVERT_READING_STYLE);
-        boolean invertReadingStyle = true;
-
         // If invert reading style setting is active instead of previous page we go to the next page
         if (invertReadingStyle) {
             nextPage();
@@ -498,14 +440,6 @@ public class StageReaderController extends BaseController {
      */
     @FXML
     private void rightPage() {
-        // TODO: 13.01.2021 реализовать!!!
-        // Get the current configuration settings
-//        Config config = sceneManager.getConfig();
-
-        // We account for whether the invert reading style checkbox has been checked by the user
-//        boolean invertReadingStyle = (boolean) config.getValue(Config.Field.INVERT_READING_STYLE);
-        boolean invertReadingStyle = true;
-
         // If invert reading style setting is active instead of next page we go to previous page
         if (invertReadingStyle) {
             previousPage();
@@ -519,8 +453,9 @@ public class StageReaderController extends BaseController {
      */
     @FXML
     private void lastPage() {
-        chapter.setCurrentPage(chapter.getPagesCount());
+        chapter.setCurrentPage(!invertReadingStyle ? chapter.getPagesCount() : 1);
         loadCurrentPage();
+        saveHistory();
     }
 
     /**
@@ -614,56 +549,11 @@ public class StageReaderController extends BaseController {
     }
 
     /**
-     * Toggle whether the stage is set as fullscreen.
-     */
-    @FXML
-    private void toggleFullscreen() {
-        boolean wasFullscreen = ((Stage) scene.getWindow()).isFullScreen();
-        setFullscreen(!wasFullscreen);
-    }
-
-    /**
-     * Set the fullscreen state.
-     *
-     * @param fullscreen whether fullscreen should be enabled
-     */
-    private void setFullscreen(boolean fullscreen) {
-        fullscreenItem.setSelected(fullscreen);
-        ((Stage) scene.getWindow()).setFullScreen(fullscreen);
-        menuBar.setVisible(!fullscreen);
-        menuBar.setManaged(!fullscreen);
-    }
-
-    /**
      * Apply the appropriate filter to the page ImageView, if necessary.
      */
     private void applyImageFilter() {
-        ColorAdjust filterAdjust = null;
-
-        // TODO: 13.01.2021 !!!
-//        Config config = sceneManager.getConfig();
-//        boolean nightModeEnabled = (boolean) config.getValue(Config.Field.NIGHT_MODE_ENABLED);
-//        boolean nightModeOnly = (boolean) config.getValue(Config.Field.PAGE_FILTER_NIGHT_MODE_ONLY);
-        boolean nightModeEnabled = false;
-        boolean nightModeOnly = false;
-
-        if (nightModeEnabled || !nightModeOnly) {
-            filterAdjust = new ColorAdjust();
-            // apply color filter
-            // TODO: 13.01.2021 !!!
-//            if ((boolean) config.getValue(Config.Field.PAGE_FILTER_COLOR_ENABLED)) {
-            if (false) {
-//                filterAdjust.setHue((double) config.getValue(Config.Field.PAGE_FILTER_COLOR_HUE));
-//                filterAdjust.setSaturation((double) config.getValue(Config.Field.PAGE_FILTER_COLOR_SATURATION));
-            }
-            // apply brightness filter
-//            if ((boolean) config.getValue(Config.Field.PAGE_FILTER_BRIGHTNESS_ENABLED)) {
-            if (false) {
-//                filterAdjust = new ColorAdjust();
-//                filterAdjust.setBrightness((double) config.getValue(Config.Field.PAGE_FILTER_BRIGHTNESS));
-            }
-        }
-        imageViewSingle.setEffect(filterAdjust);
+        // TODO: apply some filters for image
+        imageViewSingle.setEffect(null);
     }
 
     /**
@@ -752,28 +642,10 @@ public class StageReaderController extends BaseController {
         this.server = AtsumeruSource.getServerById((int) chapter.getServiceId());
 
         // enable/disable next and previous chapter buttons
-//        Series series = chapter.getSeries();
         int prevChapterIndex = getPrevChapterIndex();
         int nextChapterIndex = getNextChapterIndex();
         nextChapterButton.setDisable(nextChapterIndex < 0);
         prevChapterButton.setDisable(prevChapterIndex < 0);
-
-        // update read status of new chapter
-        // TODO: 13.01.2021 сохранение чтения в историю
-//        chapter.setRead(true);
-
-        // upload read count on tracker if enabled
-        // TODO: 13.01.2021
-//        Config config = sceneManager.getConfig();
-//        String series_id = series.getTrackerId(AniList.ID);
-//        int chapter_num = (int) Math.round(chapter.chapterNum);
-//        if ((boolean) config.getValue(Config.Field.TRACKER_ANILIST_UPDATE_AUTO)) {
-//            Tracker tracker = sceneManager.getPluginManager().getTracker(AniList.ID);
-//
-//            Track track = new Track(series_id, null, null, chapter_num, null, null);
-//            sceneManager.getContentLoader().updateSeriesTracker(tracker, series_id, track, true,
-//                    false);
-//        }
 
         Platform.runLater(() -> ((Stage) scene.getWindow()).setTitle(String.format("%s - %s", contentName, chapter.getTitle())));
     }
@@ -781,12 +653,6 @@ public class StageReaderController extends BaseController {
     @Override
     public Pane getContentRoot() {
         return container;
-    }
-
-    public void showConfigStage(ActionEvent actionEvent) {
-    }
-
-    public void toggleNightMode(ActionEvent actionEvent) {
     }
 
     public void showLoading() {

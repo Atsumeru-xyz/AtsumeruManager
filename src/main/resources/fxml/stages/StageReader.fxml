@@ -12,14 +12,7 @@
 
 <VBox fx:id="container" alignment="TOP_CENTER" stylesheets="@../../css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.stages.StageReaderController">
     <MenuBar fx:id="menuBar" style="-fx-background-color: #2d2d2d;">
-        <Menu text="%gui.reader.menu_file">
-            <MenuItem onAction="#showConfigStage" text="%gui.tooltip.settings" />
-            <SeparatorMenuItem />
-            <MenuItem id="exitButton" onAction="#exit" text="%gui.exit" />
-        </Menu>
         <Menu text="%gui.reader.menu_view">
-<!--            <CheckMenuItem fx:id="nightModeItem" onAction="#toggleNightMode" text="Night Mode" />-->
-            <CheckMenuItem fx:id="fullscreenItem" onAction="#toggleFullscreen" text="Fullscreen" />
             <CheckMenuItem fx:id="showNavBarItem" onAction="#toggleNavBar" selected="true" text="%gui.reader.show_navbar" />
             <Menu text="%gui.reader.menu_zoom">
                 <fx:define>
@@ -56,7 +49,7 @@
             <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
         </padding>
         <HBox fx:id="navLeftContainer" alignment="CENTER_LEFT">
-         <JFXButton fx:id="firstPageButton1" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#exit" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text="%gui.reader.close" textFill="WHITE">
+         <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#exit" ripplerFill="WHITE" style="-fx-background-radius: 5; -fx-background-color: -fx-accent-color; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 0);" text="%gui.reader.close" textFill="WHITE">
             <HBox.margin>
                <Insets right="15.0" />
             </HBox.margin>
