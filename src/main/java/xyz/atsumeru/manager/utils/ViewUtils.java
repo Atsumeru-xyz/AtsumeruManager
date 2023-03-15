@@ -10,6 +10,7 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -26,11 +27,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import kotlin.Pair;
 import kotlin.Triple;
+import lombok.SneakyThrows;
 import org.controlsfx.control.GridView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +44,7 @@ import xyz.atsumeru.manager.controls.jfoenix.JFXCustomDecorator;
 import xyz.atsumeru.manager.controls.jfoenix.JFXRoundedRippler;
 import xyz.atsumeru.manager.exceptions.ApiParseException;
 import xyz.atsumeru.manager.helpers.LocaleManager;
+import xyz.atsumeru.manager.managers.Settings;
 import xyz.atsumeru.manager.utils.globalutils.GUArray;
 import xyz.atsumeru.manager.utils.globalutils.GUString;
 
@@ -50,11 +54,29 @@ import java.util.List;
 import java.util.Optional;
 
 public class ViewUtils {
-
     public static final String DEFAULT_BORDER_CSS = "border-transparent";
     public static final String HOVER_BORDER_CSS = "border-colored";
     public static final String DEFAULT_BACKGROUND_CSS = "background-transparent";
     public static final String HOVER_BACKGROUND_CSS = "background-colored";
+
+    @SneakyThrows
+    public static <T> Pair<Stage, T> createDialog(String fxmlPath, String dialogTitle, Modality modality, boolean customMaximize,
+                                                  boolean fullScreen, boolean max, boolean min, int width, int height,
+                                                  Runnable onCloseButtonAction) {
+        FXMLLoader loader = FXUtils.getLoader(fxmlPath);
+        Node layout = loader.load();
+        T controller = loader.getController();
+
+        Stage stage = ViewUtils.createStageWithAppIcon();
+        Scene scene = ViewUtils.createDecoratedScene(stage, layout, customMaximize, fullScreen, max, min, width, height, false, onCloseButtonAction).getSecond();
+        ViewUtils.addStylesheetToSceneWithAccent(scene, layout, Settings.getAppAccentColor());
+
+        stage.setTitle(dialogTitle);
+        stage.setScene(scene);
+        stage.initModality(modality);
+
+        return new Pair<>(stage, controller);
+    }
 
     public static void setNodeVisible(@Nullable Node... nodes) {
         setNodeVisibleAndManaged(true, true, nodes);
