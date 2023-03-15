@@ -367,7 +367,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
             }));
         }
 
-        ViewUtils.setVBoxOnScroll(vbRoot, spRoot, 1);
+        ViewUtils.setNodeOnScroll(vbRoot, spRoot, 1);
         Platform.runLater(this::initializeBoundServicesFields);
         Platform.runLater(this::lockFields);
         Platform.runLater(this::fillData);

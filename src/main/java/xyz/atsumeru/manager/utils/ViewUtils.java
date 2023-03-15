@@ -92,9 +92,9 @@ public class ViewUtils {
         });
     }
 
-    public static void setVBoxOnScroll(VBox vbox, ScrollPane scrollPane, double deltaFactor) {
+    public static void setNodeOnScroll(Node node, ScrollPane scrollPane, double deltaFactor) {
         //https://stackoverflow.com/questions/32739269/how-do-i-change-the-amount-by-which-scrollpane-scrolls
-        vbox.setOnScroll(e -> {
+        node.setOnScroll(e -> {
             double deltaY = e.getDeltaY() * deltaFactor; // *6 to make the scrolling a bit faster
             double width = scrollPane.getContent().getBoundsInLocal().getWidth();
             double vvalue = scrollPane.getVvalue();

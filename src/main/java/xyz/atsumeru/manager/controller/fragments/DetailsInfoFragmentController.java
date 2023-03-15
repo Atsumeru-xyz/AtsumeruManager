@@ -122,7 +122,7 @@ public class DetailsInfoFragmentController implements ImageCache.ImageLoadCallba
 
     @FXML
     public void initialize() {
-        ViewUtils.setVBoxOnScroll(vbInfo, spInfo, 5);
+        ViewUtils.setNodeOnScroll(vbInfo, spInfo, 5);
         ViewUtils.setNodeGone(vbInfo);
     }
 

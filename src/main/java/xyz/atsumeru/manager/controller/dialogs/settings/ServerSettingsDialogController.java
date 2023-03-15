@@ -55,7 +55,7 @@ public class ServerSettingsDialogController extends BaseDialogController<Void> {
     @FXML
     protected void initialize() {
         loadSettings();
-        ViewUtils.setVBoxOnScroll(vbRoot, spRoot, 1);
+        ViewUtils.setNodeOnScroll(vbRoot, spRoot, 1);
         FXUtils.requestFocus(spRoot);
     }
 

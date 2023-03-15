@@ -81,7 +81,7 @@ public class ContentCategoryDialogController extends BaseDialogController<Boolea
     @FXML
     protected void initialize() {
         loadCategories();
-        ViewUtils.setVBoxOnScroll(vbRoot, spRoot, 1);
+        ViewUtils.setNodeOnScroll(vbRoot, spRoot, 1);
         Platform.runLater(() -> {
             ViewUtils.setNodeVisibleAndManaged(GUArray.isNotEmpty(series), btnSave);
             FXUtils.requestFocus(contentRoot);

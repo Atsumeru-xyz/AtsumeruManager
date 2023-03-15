@@ -124,7 +124,7 @@ public class DetailsFragmentController implements DetailsListener, OnImporterCal
 
     @FXML
     protected void initialize() throws IOException {
-        ViewUtils.setVBoxOnScroll(vbItemsRoot, spItemsList, 0.05);
+        ViewUtils.setNodeOnScroll(vbItemsRoot, spItemsList, 0.05);
         ViewUtils.setNodeGone(fpItemsList, iconSelectAll);
         hideFileListAndBackNode();
 
