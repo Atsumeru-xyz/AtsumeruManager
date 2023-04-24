@@ -4,7 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
 import xyz.atsumeru.manager.models.ExtendedSerie;
 
@@ -30,7 +30,7 @@ public class EpubOPF {
 
             String description = Optional.ofNullable(opf.selectFirst("metadata > dc|description"))
                     .map(Element::text)
-                    .map(value -> Jsoup.clean(value, Whitelist.none()))
+                    .map(value -> Jsoup.clean(value, Safelist.none()))
                     .orElse(null);
 
             LocalDate date = Optional.ofNullable(opf.selectFirst("metadata > dc|date"))
