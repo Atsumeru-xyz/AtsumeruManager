@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXTreeView;
 import com.jpro.webapi.WebAPI;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import impl.org.controlsfx.skin.GridViewSkin;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -38,6 +39,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.VirtualFlow;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -97,6 +100,7 @@ public class TabAtsumeruLibraryController extends BaseController {
     public static final String CONTENT_TYPE_TAG = "content_type";
     public static final String STATUS_TAG = "status";
     public static final String TRANSLATION_STATUS_TAG = "translation_status";
+    public static final String PLOT_TYPE_TAG = "plot_type";
     public static final String CENSORSHIP_TAG = "censorship";
     public static final String COLOR_TAG = "color";
     public static final String AGE_RATING_TAG = "age_rating";
@@ -112,14 +116,17 @@ public class TabAtsumeruLibraryController extends BaseController {
     public static final String EVENTS_TAG = "events";
     public static final String MAGAZINES_TAG = "magazines";
     public static final String CHARACTERS_TAG = "characters";
+    public static final String SERIES_TAG = "series";
     public static final String PARODIES_TAG = "parodies";
     public static final String CIRCLES_TAG = "circles";
+
     private static final String GLYPH_FILTER = "FILTER";
     private static final String GLYPH_FILTER_REMOVE = "FILTER_REMOVE";
     private static final String[] ENUM_TAGS = {
             CONTENT_TYPE_TAG,
             STATUS_TAG,
             TRANSLATION_STATUS_TAG,
+            PLOT_TYPE_TAG,
             CENSORSHIP_TAG,
             COLOR_TAG,
             AGE_RATING_TAG,
@@ -138,6 +145,7 @@ public class TabAtsumeruLibraryController extends BaseController {
             EVENTS_TAG,
             MAGAZINES_TAG,
             CHARACTERS_TAG,
+            SERIES_TAG,
             PARODIES_TAG,
             CIRCLES_TAG
     };
@@ -601,6 +609,7 @@ public class TabAtsumeruLibraryController extends BaseController {
         fillTreeMapWithEnumNames(filtersMap, CONTENT_TYPE_TAG, Arrays.asList(ContentType.values()));
         fillTreeMapWithEnumNames(filtersMap, STATUS_TAG, Status.class);
         fillTreeMapWithEnumNames(filtersMap, TRANSLATION_STATUS_TAG, TranslationStatus.class);
+        fillTreeMapWithEnumNames(filtersMap, PLOT_TYPE_TAG, PlotType.class);
         fillTreeMapWithEnumNames(filtersMap, CENSORSHIP_TAG, Censorship.class);
         fillTreeMapWithEnumNames(filtersMap, COLOR_TAG, Color.class);
         fillTreeMapWithEnumNames(filtersMap, AGE_RATING_TAG, AgeRating.class);
@@ -717,6 +726,11 @@ public class TabAtsumeruLibraryController extends BaseController {
                 return (item1, item2) -> AlphanumComparator.compareStrings(GUString.join(",", item1.getLanguages()), GUString.join(",", item2.getLanguages()));
             case PUBLISHER:
                 return (item1, item2) -> AlphanumComparator.compareStrings(item1.getPublisher(), item2.getPublisher());
+            case SERIE:
+                return (item1, item2) -> AlphanumComparator.compareStrings(
+                        GUArray.safeGetString(item1.getSeries(), 0, ""),
+                        GUArray.safeGetString(item2.getSeries(), 0, "")
+                );
             case PARODY:
                 return (item1, item2) -> AlphanumComparator.compareStrings(
                         GUArray.safeGetString(item1.getParodies(), 0, ""),
@@ -902,6 +916,8 @@ public class TabAtsumeruLibraryController extends BaseController {
                 return getEnumStringLocalizedSingletonList(serie.getStatus());
             case TRANSLATION_STATUS_TAG:
                 return getEnumStringLocalizedSingletonList(serie.getTranslationStatus());
+            case PLOT_TYPE_TAG:
+                return getEnumStringLocalizedSingletonList(serie.getPlotType());
             case CENSORSHIP_TAG:
                 return getEnumStringLocalizedSingletonList(serie.getCensorship());
             case COLOR_TAG:
@@ -933,6 +949,8 @@ public class TabAtsumeruLibraryController extends BaseController {
                 return serie.getMagazines();
             case CHARACTERS_TAG:
                 return serie.getCharacters();
+            case SERIES_TAG:
+                return serie.getSeries();
             case PARODIES_TAG:
                 return serie.getParodies();
             case CIRCLES_TAG:
@@ -944,7 +962,7 @@ public class TabAtsumeruLibraryController extends BaseController {
     }
 
     private List<String> getEnumStringLocalizedSingletonList(String value) {
-        return Collections.singletonList(LocaleManager.getString(ENUM_RES_BUNDLE_PREFIX + value.toLowerCase()));
+        return Collections.singletonList(LocaleManager.getString(GUString.isNotEmpty(value) ? (ENUM_RES_BUNDLE_PREFIX + value.toLowerCase()) : "enum.unknown"));
     }
 
     private void bindGridVisibilityAndManagedProperties() {

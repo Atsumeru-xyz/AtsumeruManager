@@ -85,6 +85,8 @@ public class DetailsInfoFragmentController implements ImageCache.ImageLoadCallba
     @FXML
     private TextFlow tfCharacters;
     @FXML
+    private TextFlow tfSeries;
+    @FXML
     private TextFlow tfParodies;
     @FXML
     private TextFlow tfEvent;
@@ -145,6 +147,7 @@ public class DetailsInfoFragmentController implements ImageCache.ImageLoadCallba
         safeCreateTextFlowInfo(tfTranslators, info.getTranslators());
         safeCreateTextFlowInfo(tfMagazines, info.getMagazines());
         safeCreateTextFlowInfo(tfCharacters, info.getCharacters());
+        safeCreateTextFlowInfo(tfSeries, info.getSeries());
         safeCreateTextFlowInfo(tfParodies, info.getParodies());
         safeCreateTextFlowInfo(tfEvent, info.getEvent());
         safeCreateTextFlowInfo(tfCircles, info.getCircles());

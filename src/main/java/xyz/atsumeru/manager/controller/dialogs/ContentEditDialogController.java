@@ -135,6 +135,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
     @FXML
     public MFXComboBox<String> cbTransStatus;
     @FXML
+    public MFXComboBox<String> cbPlotType;
+    @FXML
     public MFXComboBox<String> cbCensorship;
     @FXML
     public MFXComboBox<String> cbColor;
@@ -160,6 +162,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
     public MFXTextField tfMagazines;
     @FXML
     public MFXTextField tfCharacters;
+    @FXML
+    public MFXTextField tfSeries;
     @FXML
     public MFXTextField tfParodies;
     @FXML
@@ -560,6 +564,14 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                             .orElse(TranslationStatus.UNKNOWN.name())
             );
             setComboBoxItems(
+                    PlotType.class,
+                    Arrays.asList(PlotType.values()),
+                    cbPlotType,
+                    Optional.ofNullable(serie.getPlotType())
+                            .filter(GUString::isNotEmpty)
+                            .orElse(PlotType.UNKNOWN.name())
+            );
+            setComboBoxItems(
                     Censorship.class,
                     Arrays.asList(Censorship.values()),
                     cbCensorship,
@@ -596,6 +608,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
             ViewUtils.setNotEmptyTextToTextInput(tfEvent, serie.getEvent());
             ViewUtils.setNotEmptyTextToTextInput(tfMagazines, GUString.join(",", serie.getMagazines()));
             ViewUtils.setNotEmptyTextToTextInput(tfCharacters, GUString.join(",", serie.getCharacters()));
+            ViewUtils.setNotEmptyTextToTextInput(tfSeries, GUString.join(",", serie.getSeries()));
             ViewUtils.setNotEmptyTextToTextInput(tfParodies, GUString.join(",", serie.getParodies()));
             ViewUtils.setNotEmptyTextToTextInput(tfCircles, GUString.join(",", serie.getCircles()));
             ViewUtils.setNotEmptyTextToTextInput(tfScore, serie.getScore());
@@ -616,6 +629,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
             cbContentType.getSelectionModel().selectFirst();
             cbStatus.getSelectionModel().selectFirst();
             cbTransStatus.getSelectionModel().selectFirst();
+            cbPlotType.getSelectionModel().selectFirst();
             cbCensorship.getSelectionModel().selectFirst();
             cbColor.getSelectionModel().selectFirst();
 
@@ -657,6 +671,14 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                         .orElse(TranslationStatus.UNKNOWN.name())
         );
         setComboBoxItems(
+                PlotType.class,
+                Arrays.asList(PlotType.values()),
+                cbPlotType,
+                Optional.ofNullable(item.getInfo().getPlotType())
+                        .map(Enum::toString)
+                        .orElse(PlotType.UNKNOWN.name())
+        );
+        setComboBoxItems(
                 Censorship.class,
                 Arrays.asList(Censorship.values()),
                 cbCensorship,
@@ -692,6 +714,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         fillLockableTextInput(tfEvent, item.getInfo().getEvent(), overrideFields);
         fillLockableTextInput(tfMagazines, item.getInfo().getMagazines(), overrideFields);
         fillLockableTextInput(tfCharacters, item.getInfo().getCharacters(), overrideFields);
+        fillLockableTextInput(tfSeries, item.getInfo().getSeries(), overrideFields);
         fillLockableTextInput(tfParodies, item.getInfo().getParodies(), overrideFields);
         fillLockableTextInput(tfCircles, item.getInfo().getCircles(), overrideFields);
         fillLockableTextInput(tfScore, item.getScore(), overrideFields);
@@ -758,6 +781,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         AutocompletionHelper.removeListeners(tfEvent);
         AutocompletionHelper.removeListeners(tfMagazines);
         AutocompletionHelper.removeListeners(tfCharacters);
+        AutocompletionHelper.removeListeners(tfSeries);
         AutocompletionHelper.removeListeners(tfParodies);
         AutocompletionHelper.removeListeners(tfCircles);
     }
@@ -777,6 +801,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
             AutocompletionHelper.bindSingleAutocompletion(tfEvent, controller.getAllFiltersMap().get(EVENTS_TAG).keySet());
             AutocompletionHelper.bindMultiAutocompletion(tfMagazines, controller.getAllFiltersMap().get(MAGAZINES_TAG).keySet());
             AutocompletionHelper.bindMultiAutocompletion(tfCharacters, controller.getAllFiltersMap().get(CHARACTERS_TAG).keySet());
+            AutocompletionHelper.bindMultiAutocompletion(tfSeries, controller.getAllFiltersMap().get(SERIES_TAG).keySet());
             AutocompletionHelper.bindMultiAutocompletion(tfParodies, controller.getAllFiltersMap().get(PARODIES_TAG).keySet());
             AutocompletionHelper.bindMultiAutocompletion(tfCircles, controller.getAllFiltersMap().get(CIRCLES_TAG).keySet());
         }
@@ -786,10 +811,10 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         if (isDialogMode || !isContextMenuInitialized) {
             TextFieldContextMenuHelper.addMenuItemsIntoDefaultMenu(tfTitle, tfAltTitle, tfJapTitle, tfKorTitle, tfAuthors,
                     tfArtists, tfPublisher, tfTranslators, tfGenres, tfTags, tfYear, tfCountry, tfLanguages, tfEvent,
-                    tfMagazines, tfCharacters, tfParodies, tfCircles, tfRating, tfScore);
+                    tfMagazines, tfCharacters, tfSeries, tfParodies, tfCircles, tfRating, tfScore);
             TextFieldContextMenuHelper.localizeDefaultMenu(taLinks, taDescription, tfFolder,
                     // Combo Boxes
-                    cbContentType, cbStatus, cbTransStatus, cbCensorship, cbColor,
+                    cbContentType, cbStatus, cbTransStatus, cbPlotType, cbCensorship, cbColor,
                     // Bound Services
                     tfMyAnimeList, tfShikimori, tfKitsu, tfAniList, tfMangaUpdates, tfAnimePlanet, tfComicVine, tfComicsDB, tfHentag,
                     tfMyAnimeListID, tfShikimoriID, tfKitsuID, tfAniListID, tfMangaUpdatesID, tfAnimePlanetID, tfComicVineID, tfComicsDBID, tfHentagID);
@@ -985,12 +1010,14 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         serie.setLanguages(arrayValuesToList(getArrayValues(tfLanguages)));
         serie.setMagazines(arrayValuesToList(getArrayValues(tfMagazines)));
         serie.setCharacters(arrayValuesToList(getArrayValues(tfCharacters)));
+        serie.setSeries(arrayValuesToList(getArrayValues(tfSeries)));
         serie.setParodies(arrayValuesToList(getArrayValues(tfParodies)));
         serie.setCircles(arrayValuesToList(getArrayValues(tfCircles)));
 
         serie.setContentType(Arrays.asList(ContentType.values()).get(cbContentType.getSelectionModel().getSelectedIndex()).name());
         serie.setStatus(Status.getReadableStatuses().get(cbStatus.getSelectionModel().getSelectedIndex()).name());
         serie.setTranslationStatus(Arrays.asList(TranslationStatus.values()).get(cbTransStatus.getSelectionModel().getSelectedIndex()).name());
+        serie.setPlotType(Arrays.asList(PlotType.values()).get(cbPlotType.getSelectionModel().getSelectedIndex()).name());
         serie.setCensorship(Arrays.asList(Censorship.values()).get(cbCensorship.getSelectionModel().getSelectedIndex()).name());
         serie.setColor(Arrays.asList(Color.values()).get(cbColor.getSelectionModel().getSelectedIndex()).name());
 

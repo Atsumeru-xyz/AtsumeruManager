@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import xyz.atsumeru.manager.controls.DragNDropFilesView?>
+
 <?import com.jfoenix.controls.*?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import de.jensd.fx.glyphs.materialdesignicons.*?>
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.*?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <StackPane fx:id="contentRoot" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #2D2D2D;" stylesheets="@/css/theme.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xyz.atsumeru.manager.controller.dialogs.ContentEditDialogController">
     <VBox fx:id="contentSelect" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" StackPane.alignment="CENTER">
         <Label fx:id="lblHint" alignment="CENTER" text="%gui.metadata_editor.select_files" textAlignment="CENTER" wrapText="true">
@@ -116,6 +118,7 @@
                                                 <RowConstraints minHeight="40.0" vgrow="NEVER" />
                                                 <RowConstraints minHeight="40.0" vgrow="NEVER" />
                                                 <RowConstraints minHeight="40.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="NEVER" />
                                                 <RowConstraints minHeight="40.0" vgrow="NEVER" />
                                                 <RowConstraints minHeight="40.0" vgrow="NEVER" />
                                             </rowConstraints>
@@ -123,13 +126,15 @@
                                                 <MFXComboBox fx:id="cbContentType" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.content_type" GridPane.columnIndex="1" />
                                                 <MFXComboBox fx:id="cbStatus" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <MFXComboBox fx:id="cbTransStatus" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.translation_status" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <MFXComboBox fx:id="cbCensorship" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.censorship" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <MFXComboBox fx:id="cbColor" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.color" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <MFXComboBox fx:id="cbCensorship" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.censorship" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <MFXComboBox fx:id="cbColor" floatMode="BORDER" maxWidth="1.7976931348623157E308" promptText="%gui.color" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                 <MaterialDesignIconView fill="WHITE" glyphName="TRANSLATE" layoutX="10.0" layoutY="85.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
                                                 <MaterialDesignIconView fill="WHITE" glyphName="BOOK_OPEN" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" />
-                                                <MaterialDesignIconView fill="WHITE" glyphName="BLUR_RADIAL" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" />
-                                                <MaterialDesignIconView fill="WHITE" glyphName="INVERT_COLORS" layoutX="10.0" layoutY="268.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="4" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="BLUR_RADIAL" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="4" />
+                                                <MaterialDesignIconView fill="WHITE" glyphName="INVERT_COLORS" layoutX="10.0" layoutY="268.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5" />
                                                 <MaterialDesignIconView fill="WHITE" glyphName="LEAD_PENCIL" layoutX="10.0" layoutY="208.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1" />
+                                    <MFXComboBox fx:id="cbPlotType" floatMode="BORDER" layoutX="38.0" layoutY="93.0" maxWidth="1.7976931348623157E308" promptText="%gui.plot_type" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <MaterialDesignIconView fill="WHITE" glyphName="TOOLTIP_EDIT" layoutX="10.0" layoutY="118.0" size="20" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" />
                                             </children>
                                             <VBox.margin>
                                                 <Insets />
@@ -339,6 +344,7 @@
                                 <RowConstraints minHeight="54.0" vgrow="NEVER" />
                                 <RowConstraints minHeight="54.0" vgrow="NEVER" />
                                 <RowConstraints minHeight="54.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="54.0" vgrow="NEVER" />
                             </rowConstraints>
                             <children>
                                 <MFXTextField fx:id="tfAuthors" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.authors" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1">
@@ -397,7 +403,7 @@
                                         <Insets left="8.0" />
                                     </GridPane.margin>
                                 </MFXTextField>
-                                <MFXTextField fx:id="tfLanguages" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.languages" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5">
+                                <MFXTextField fx:id="tfLanguages" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.languages" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="1" GridPane.rowIndex="7">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -405,7 +411,7 @@
                                         <Insets left="8.0" />
                                     </GridPane.margin>
                                 </MFXTextField>
-                                <MFXTextField fx:id="tfTranslators" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.translators" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                <MFXTextField fx:id="tfTranslators" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.translators" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -413,7 +419,15 @@
                                         <Insets left="8.0" />
                                     </GridPane.margin>
                                 </MFXTextField>
-                                <MFXTextField fx:id="tfCharacters" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.characters" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                <MFXTextField fx:id="tfCharacters" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.characters" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="8.0" />
+                                    </GridPane.margin>
+                                </MFXTextField>
+                                <MFXTextField fx:id="tfSeries" floatMode="BORDER" floatingText="%gui.dialog.metadata_editor.series" maxHeight="44.0" maxWidth="1.7976931348623157E308" promptText=" " GridPane.columnIndex="5" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
@@ -453,8 +467,8 @@
                                         <Insets left="8.0" />
                                     </GridPane.margin>
                                 </MFXTextField>
-                                <MaterialDesignIconView fill="WHITE" glyphName="TRANSLATE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                <MaterialDesignIconView fill="WHITE" glyphName="FACE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                <MaterialDesignIconView fill="WHITE" glyphName="TRANSLATE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" />
+                                <MaterialDesignIconView fill="WHITE" glyphName="FACE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                                 <MaterialDesignIconView fill="WHITE" glyphName="BOOK_OPEN" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
                                 <MaterialDesignIconView fill="WHITE" glyphName="CHECKBOX_BLANK_CIRCLE_OUTLINE" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
                                 <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
@@ -492,7 +506,7 @@
                                         <Image url="@/images/icons/round_sell_white_18.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                                <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="12.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                                     <image>
                                         <Image url="@/images/icons/web.png" />
                                     </image>
@@ -514,13 +528,15 @@
                                 <MaterialDesignIconView fx:id="btnLockYear" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="207.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                                 <MaterialDesignIconView fx:id="btnLockGenres" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="261.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                 <MaterialDesignIconView fx:id="btnLockTags" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="315.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                <MaterialDesignIconView fx:id="btnLockLanguages" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="369.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" />
-                                <MaterialDesignIconView fx:id="btnLockTranslators" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="46.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                                <MaterialDesignIconView fx:id="btnLockCharacters" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="100.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                                <MaterialDesignIconView fx:id="btnLockLanguages" fill="WHITE" glyphName="LOCK_OPEN" layoutX="362.0" layoutY="369.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                <MaterialDesignIconView fx:id="btnLockTranslators" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="46.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" />
+                                <MaterialDesignIconView fx:id="btnLockCharacters" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="100.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="1" />
                                 <MaterialDesignIconView fx:id="btnLockParodies" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="154.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="3" />
                                 <MaterialDesignIconView fx:id="btnLockEvent" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="208.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="4" />
                                 <MaterialDesignIconView fx:id="btnLockMagazines" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="262.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="5" />
                                 <MaterialDesignIconView fx:id="btnLockCircles" fill="WHITE" glyphName="LOCK_OPEN" layoutX="754.0" layoutY="262.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                                <MaterialDesignIconView fx:id="btnLockSeries" fill="WHITE" glyphName="LOCK_OPEN" layoutX="758.0" layoutY="100.0" onMouseClicked="#onLockClick" opacity="0.1" size="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <MaterialDesignIconView fill="WHITE" glyphName="RENAME_BOX" layoutX="405.0" layoutY="102.0" size="26" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                             </children>
                             <VBox.margin>
                                 <Insets />

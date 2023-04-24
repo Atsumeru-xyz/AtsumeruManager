@@ -23,6 +23,7 @@ public class Info implements Serializable {
     private List<String> artists = new ArrayList<>();
     private List<String> magazines = new ArrayList<>();
     private List<String> circles = new ArrayList<>();
+    private List<String> series = new ArrayList<>();
     private List<String> parodies = new ArrayList<>();
     private List<String> characters = new ArrayList<>();
     private int chaptersCount;
@@ -34,6 +35,7 @@ public class Info implements Serializable {
     private Status status = Status.UNKNOWN;
     private Censorship censorship = Censorship.UNKNOWN;
     private TranslationStatus mangaTranslationStatus = TranslationStatus.UNKNOWN;
+    private PlotType plotType = PlotType.UNKNOWN;
     private Color color = Color.UNKNOWN;
     private String volumesCount;
 

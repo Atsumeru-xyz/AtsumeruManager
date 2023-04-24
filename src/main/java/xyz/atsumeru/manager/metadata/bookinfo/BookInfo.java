@@ -81,6 +81,7 @@ public class BookInfo {
         putJSON(obj, "artists", serie.getArtists());
         putJSON(obj, "languages", serie.getLanguages());
         putJSON(obj, "translators", serie.getTranslators());
+        putJSON(obj, "series", serie.getSeries());
         putJSON(obj, "parodies", serie.getParodies());
         putJSON(obj, "circles", serie.getCircles());
         putJSON(obj, "magazines", serie.getMagazines());
@@ -105,6 +106,7 @@ public class BookInfo {
         // Statuses
         putJSON(obj, "status", serie.getStatus());
         putJSON(obj, "translation_status", serie.getTranslationStatus());
+        putJSON(obj, "plot_type", serie.getPlotType());
         putJSON(obj, "censorship", serie.getCensorship());
         putJSON(obj, "content_type", serie.getContentType());
         putJSON(obj, "color", serie.getColor());
@@ -166,6 +168,7 @@ public class BookInfo {
         serie.setArtists(JSONHelper.getStringList(obj, "artists"));
         serie.setTranslators(JSONHelper.getStringList(obj, "translators"));
         serie.setLanguages(JSONHelper.getStringList(obj, "languages"));
+        serie.setSeries(JSONHelper.getStringList(obj, "series"));
         serie.setParodies(JSONHelper.getStringList(obj, "parodies"));
         serie.setCircles(JSONHelper.getStringList(obj, "circles"));
         serie.setMagazines(JSONHelper.getStringList(obj, "magazines"));
@@ -181,6 +184,7 @@ public class BookInfo {
         // Statuses
         serie.setStatus(GUEnum.valueOf(Status.class, JSONHelper.getStringSafe(obj, "status")).toString());
         serie.setTranslationStatus(GUEnum.valueOf(TranslationStatus.class, JSONHelper.getStringSafe(obj, "translation_status")).toString());
+        serie.setPlotType(GUEnum.valueOf(PlotType.class, JSONHelper.getStringSafe(obj, "plot_type")).toString());
         serie.setCensorship(GUEnum.valueOf(Censorship.class, JSONHelper.getStringSafe(obj, "censorship")).toString());
         serie.setContentType(GUEnum.valueOf(ContentType.class, JSONHelper.getStringSafe(obj, "content_type")).toString());
         serie.setColor(GUEnum.valueOf(Color.class, JSONHelper.getStringSafe(obj, "color")).toString());
@@ -232,6 +236,7 @@ public class BookInfo {
         putJSON(obj, "artists", content.getInfo().getArtists());
         putJSON(obj, "languages", GUArray.splitString(content.getInfo().getLanguage(), ","));
         putJSON(obj, "translators", content.getInfo().getTranslators());
+        putJSON(obj, "series", content.getInfo().getSeries());
         putJSON(obj, "parodies", content.getInfo().getParodies());
         putJSON(obj, "circles", content.getInfo().getCircles());
         putJSON(obj, "magazines", content.getInfo().getMagazines());
@@ -261,6 +266,7 @@ public class BookInfo {
         // Statuses
         putJSON(obj, "status", content.getInfo().getStatus().toString());
         putJSON(obj, "translation_status", content.getInfo().getMangaTranslationStatus().toString());
+        putJSON(obj, "plot_type", content.getInfo().getPlotType().toString());
         putJSON(obj, "censorship", content.getInfo().getCensorship().toString());
         putJSON(obj, "content_type", content.getInfo().getContentType().toString());
         putJSON(obj, "color", content.getInfo().getColor().toString());

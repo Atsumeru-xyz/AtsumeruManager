@@ -70,15 +70,17 @@ public class AtsumeruAdapter {
         info.setVolumesCount(String.valueOf(serie.getVolumesCount()));
         info.setChaptersCount((int) serie.getChaptersCount());
         info.setStatus(libraryPresentation != LibraryPresentation.SINGLES && libraryPresentation != LibraryPresentation.ARCHIVES
-                ? Status.valueOf(serie.getStatus())
+                ? GUEnum.valueOf(Status.class, serie.getStatus())
                 : Status.SINGLE);
-        info.setMangaTranslationStatus(TranslationStatus.valueOf(serie.getTranslationStatus()));
-        info.setCensorship(Censorship.valueOf(serie.getCensorship()));
+        info.setMangaTranslationStatus(GUEnum.valueOf(TranslationStatus.class, serie.getTranslationStatus()));
+        info.setPlotType(GUEnum.valueOf(PlotType.class, serie.getPlotType()));
+        info.setCensorship(GUEnum.valueOf(Censorship.class, serie.getCensorship()));
 
         info.setArtists(serie.getArtists());
         info.setEvent(serie.getEvent());
         info.setMagazines(serie.getMagazines());
         info.setCircles(serie.getCircles());
+        info.setSeries(serie.getSeries());
         info.setParodies(serie.getParodies());
         info.setCharacters(serie.getCharacters());
         info.setColor(GUEnum.valueOf(Color.class, serie.getColor()));

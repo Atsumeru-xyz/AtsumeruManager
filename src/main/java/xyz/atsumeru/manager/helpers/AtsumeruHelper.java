@@ -28,6 +28,8 @@ public class AtsumeruHelper {
                 return MaterialDesignIcon.FORMAT_COLOR_TEXT;
             case PUBLISHER:
                 return MaterialDesignIcon.ACCOUNT_LOCATION;
+            case SERIE:
+                return MaterialDesignIcon.RENAME_BOX;
             case PARODY:
                 return MaterialDesignIcon.BOOK_VARIANT;
             case VOLUMES_COUNT:
