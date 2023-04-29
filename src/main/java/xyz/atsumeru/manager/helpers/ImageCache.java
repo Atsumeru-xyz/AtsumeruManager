@@ -32,8 +32,8 @@ public class ImageCache {
     private static final String PLACEHOLDER_NO_IMAGE_PATH = "/images/no_image.png";
     public static final Image PLACEHOLDER_IMAGE = new Image(ImageCache.PLACEHOLDER_NO_IMAGE_PATH);
     private static final Cache<String, Image> IMAGE_CACHE = Caffeine.newBuilder()
-            .maximumSize(300)
-            .expireAfterAccess(3, TimeUnit.MINUTES)
+            .maximumSize(600)
+            .expireAfterAccess(10, TimeUnit.MINUTES)
             .build();
 
     private final String imageHash;
@@ -50,7 +50,7 @@ public class ImageCache {
     private ImageLoadCallback callback;
 
     private static final ExecutorService downloadingExecutorService = Executors.newFixedThreadPool(6);
-    private static final ExecutorService readingExecutorService = Executors.newFixedThreadPool(6);
+    private static final ExecutorService readingExecutorService = Executors.newFixedThreadPool(24);
 
     private ImageCache(String imageHash, String imageUrl) {
         this.imageHash = imageHash;
@@ -282,7 +282,15 @@ public class ImageCache {
 
     private void onLoad(@Nullable Image image, boolean fromCache) {
         if (callback != null && image != null) {
-            callback.onLoad(image, contentId, fromCache, false);
+            if (image.isBackgroundLoading() && image.getProgress() < 1.0) {
+                image.progressProperty().addListener((observable, oldValue, newValue) -> {
+                    if (image.getProgress() == 1.0 && !image.isError()) {
+                        callback.onLoad(image, contentId, fromCache, false);
+                    }
+                });
+            } else {
+                callback.onLoad(image, contentId, fromCache, false);
+            }
         }
     }
 

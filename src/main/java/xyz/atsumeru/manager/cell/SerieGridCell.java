@@ -271,6 +271,7 @@ public class SerieGridCell extends BaseGridCell<Serie> implements ImageCache.Ima
                     .withContentId(imageHash)
                     .withCacheType(ImageCache.ImageCacheType.THUMBNAIL)
                     .withHeaders(AtsumeruSource.createAuthorizationHeaders())
+                    .withBackgroundLoadingFromFS()
                     .withCallback(this)
                     .getAsync();
         } else {
