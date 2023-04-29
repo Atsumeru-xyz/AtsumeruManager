@@ -75,6 +75,15 @@
                                                 </Label>
                                             </children>
                                         </TextFlow>
+                                        <TextFlow fx:id="tfPlotType" VBox.vgrow="NEVER">
+                                            <children>
+                                                <Label text="%gui.info_plot_type" textFill="#ecf0f1">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </TextFlow>
                                     </children>
                                 </VBox>
                                 <VBox spacing="5.0" HBox.hgrow="ALWAYS">

@@ -100,6 +100,8 @@ public class DetailsInfoFragmentController implements ImageCache.ImageLoadCallba
     private TextFlow tfStatus;
     @FXML
     private TextFlow tfTranslationStatus;
+    @FXML
+    private TextFlow tfPlotType;
 
     @FXML
     private ImageView ivGenresIcon;
@@ -154,6 +156,7 @@ public class DetailsInfoFragmentController implements ImageCache.ImageLoadCallba
 
         safeCreateTextFlowInfo(tfStatus, GUEnum.getEnumLocalizedString(info.getStatus()));
         safeCreateTextFlowInfo(tfTranslationStatus, GUEnum.getEnumLocalizedString(info.getMangaTranslationStatus()));
+        safeCreateTextFlowInfo(tfPlotType, GUEnum.getEnumLocalizedString(info.getPlotType()));
         safeCreateTextFlowInfo(tfCensorship, GUEnum.getEnumNotUnknownLocalizedString(info.getCensorship()));
         safeCreateTextFlowInfo(tfColor, GUEnum.getEnumNotUnknownLocalizedString(info.getColor()));
 

@@ -26,7 +26,7 @@ public enum Status {
     }
 
     public static List<Status> getReadableStatuses() {
-        return new ArrayList<Status>(){{
+        return new ArrayList<>() {{
             add(UNKNOWN);
             add(ONGOING);
             add(COMPLETE);
