@@ -646,53 +646,76 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
     private void fillData(Content item, boolean overrideFields) {
         preFillTasks();
 
+        ContentType currentContentType = getEnumStringComboBoxValue(ContentType.class, cbContentType);
         setComboBoxItems(
                 ContentType.class,
                 Arrays.asList(ContentType.values()),
                 cbContentType,
-                Optional.ofNullable(item.getInfo().getContentType())
-                        .map(Enum::toString)
-                        .orElse(ContentType.UNKNOWN.name())
+                overrideFields || currentContentType == ContentType.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getContentType())
+                            .map(Enum::toString)
+                            .orElse(ContentType.UNKNOWN.name())
+                        : currentContentType.name()
         );
+
+        Status currentStatus = Status.getReadableStatuses().get(cbStatus.getSelectionModel().getSelectedIndex());
         setComboBoxItems(
                 Status.class,
                 Status.getReadableStatuses(),
                 cbStatus,
-                Optional.ofNullable(item.getInfo().getStatus())
-                        .map(Enum::toString)
-                        .orElse(Status.UNKNOWN.name())
+                overrideFields || currentStatus == Status.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getStatus())
+                            .map(Enum::toString)
+                            .orElse(Status.UNKNOWN.name())
+                        : currentStatus.name()
         );
+
+        TranslationStatus currentTranslationStatus = getEnumStringComboBoxValue(TranslationStatus.class, cbTransStatus);
         setComboBoxItems(
                 TranslationStatus.class,
                 Arrays.asList(TranslationStatus.values()),
                 cbTransStatus,
-                Optional.ofNullable(item.getInfo().getMangaTranslationStatus())
-                        .map(Enum::toString)
-                        .orElse(TranslationStatus.UNKNOWN.name())
+                overrideFields || currentTranslationStatus == TranslationStatus.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getMangaTranslationStatus())
+                            .map(Enum::toString)
+                            .orElse(TranslationStatus.UNKNOWN.name())
+                        : currentTranslationStatus.name()
         );
+
+        PlotType currentPlotType = getEnumStringComboBoxValue(PlotType.class, cbPlotType);
         setComboBoxItems(
                 PlotType.class,
                 Arrays.asList(PlotType.values()),
                 cbPlotType,
-                Optional.ofNullable(item.getInfo().getPlotType())
-                        .map(Enum::toString)
-                        .orElse(PlotType.UNKNOWN.name())
+                overrideFields || currentPlotType == PlotType.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getPlotType())
+                            .map(Enum::toString)
+                            .orElse(PlotType.UNKNOWN.name())
+                        : currentPlotType.name()
         );
+
+        Censorship currentCensorship = getEnumStringComboBoxValue(Censorship.class, cbCensorship);
         setComboBoxItems(
                 Censorship.class,
                 Arrays.asList(Censorship.values()),
                 cbCensorship,
-                Optional.ofNullable(item.getInfo().getCensorship())
-                        .map(Enum::toString)
-                        .orElse(Censorship.UNKNOWN.name())
+                overrideFields || currentCensorship == Censorship.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getCensorship())
+                            .map(Enum::toString)
+                            .orElse(Censorship.UNKNOWN.name())
+                        : currentCensorship.name()
         );
+
+        Color currentColor = getEnumStringComboBoxValue(Color.class, cbColor);
         setComboBoxItems(
                 Color.class,
                 Arrays.asList(Color.values()),
                 cbColor,
-                Optional.ofNullable(item.getInfo().getColor())
-                        .map(Enum::toString)
-                        .orElse(Color.UNKNOWN.name())
+                overrideFields || currentColor == Color.UNKNOWN
+                        ? Optional.ofNullable(item.getInfo().getColor())
+                            .map(Enum::toString)
+                            .orElse(Color.UNKNOWN.name())
+                        : currentColor.name()
         );
 
         configureMatureAdultCheckBoxes(item.getInfo().isMature(), item.getInfo().isAdult());
@@ -836,6 +859,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         btnFetchMetadata.setOnMouseClicked(event -> {
             if (FXApplication.getParsersManager().isSupportsMetadataFetching()) {
                 MetadataParserDialogController.createAndShow(
+                        !WebAPI.isBrowser(),
                         new OnDialogInputListener() {
                             @Override
                             public void onConfirmInput(String input, boolean overrideFields) {
@@ -1014,12 +1038,12 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         serie.setParodies(arrayValuesToList(getArrayValues(tfParodies)));
         serie.setCircles(arrayValuesToList(getArrayValues(tfCircles)));
 
-        serie.setContentType(Arrays.asList(ContentType.values()).get(cbContentType.getSelectionModel().getSelectedIndex()).name());
+        serie.setContentType(getEnumStringComboBoxValue(ContentType.class, cbContentType).name());
         serie.setStatus(Status.getReadableStatuses().get(cbStatus.getSelectionModel().getSelectedIndex()).name());
-        serie.setTranslationStatus(Arrays.asList(TranslationStatus.values()).get(cbTransStatus.getSelectionModel().getSelectedIndex()).name());
-        serie.setPlotType(Arrays.asList(PlotType.values()).get(cbPlotType.getSelectionModel().getSelectedIndex()).name());
-        serie.setCensorship(Arrays.asList(Censorship.values()).get(cbCensorship.getSelectionModel().getSelectedIndex()).name());
-        serie.setColor(Arrays.asList(Color.values()).get(cbColor.getSelectionModel().getSelectedIndex()).name());
+        serie.setTranslationStatus(getEnumStringComboBoxValue(TranslationStatus.class, cbTransStatus).name());
+        serie.setPlotType(getEnumStringComboBoxValue(PlotType.class, cbPlotType).name());
+        serie.setCensorship(getEnumStringComboBoxValue(Censorship.class, cbCensorship).name());
+        serie.setColor(getEnumStringComboBoxValue(Color.class, cbColor).name());
 
         serie.setMature(cbMature.isSelected());
         serie.setAdult(cbAdult.isSelected());
@@ -1045,6 +1069,10 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
         } else {
             patchSerieOnRemoteServer(rbSaveSerieOnly.isSelected(), rbSaveToLinkedArchives.isSelected(), rbSaveIntoDBOnly.isSelected());
         }
+    }
+
+    private <E extends Enum<E>> E getEnumStringComboBoxValue(Class<E> classE, MFXComboBox<String> comboBox) {
+        return Arrays.asList(classE.getEnumConstants()).get(comboBox.getSelectionModel().getSelectedIndex());
     }
 
     private void fillSerieBoundServices() {
