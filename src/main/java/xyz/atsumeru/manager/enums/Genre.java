@@ -82,7 +82,7 @@ public enum Genre {
 
         string = getGenreWithoutSpecialChars(string);
         for (Genre genre : Genre.MangaGenreStr.keySet()) {
-            if (isEq(string, Genre.MangaGenreStr.get(genre))) {
+            if (isEq(string, Genre.MangaGenreStr.get(genre)) || GUString.equalsIgnoreCase(string, genre.toString())) {
                 return genre;
             }
         }
@@ -91,7 +91,7 @@ public enum Genre {
 
     static boolean isEq(String value, String[] arr) {
         for (String str : arr) {
-            if (str.equals(value)) {
+            if (GUString.equalsIgnoreCase(str, value)) {
                 return true;
             }
         }
