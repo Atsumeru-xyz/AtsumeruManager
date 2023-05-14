@@ -81,6 +81,7 @@ import xyz.atsumeru.manager.utils.PopupHelper;
 import xyz.atsumeru.manager.utils.ViewUtils;
 import xyz.atsumeru.manager.utils.comparator.AlphanumComparator;
 import xyz.atsumeru.manager.utils.comparator.NaturalStringComparator;
+import xyz.atsumeru.manager.utils.globalutils.GUApp;
 import xyz.atsumeru.manager.utils.globalutils.GUArray;
 import xyz.atsumeru.manager.utils.globalutils.GUEnum;
 import xyz.atsumeru.manager.utils.globalutils.GUString;
@@ -984,7 +985,7 @@ public class TabAtsumeruLibraryController extends BaseController {
                 new Thread(() -> {
                     int attempts = 0;
                     while (attempts < 100 && (isAppResizing.get() || isRecalculating.get())) {
-                        GUArray.sleepThread(20);
+                        GUApp.sleepThread(20);
                         attempts++;
                     }
 
