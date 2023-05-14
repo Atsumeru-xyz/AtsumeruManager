@@ -45,6 +45,7 @@ import javafx.util.converter.FloatStringConverter;
 import kotlin.Pair;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.Nullable;
 import xyz.atsumeru.manager.FXApplication;
 import xyz.atsumeru.manager.adapter.AtsumeruAdapter;
@@ -62,6 +63,7 @@ import xyz.atsumeru.manager.managers.Settings;
 import xyz.atsumeru.manager.managers.TabPaneManager;
 import xyz.atsumeru.manager.managers.TabsManager;
 import xyz.atsumeru.manager.managers.WorkspaceManager;
+import xyz.atsumeru.manager.metadata.bookinfo.BookInfo;
 import xyz.atsumeru.manager.models.ExtendedSerie;
 import xyz.atsumeru.manager.models.content.Content;
 import xyz.atsumeru.manager.source.AtsumeruSource;
@@ -73,6 +75,8 @@ import xyz.atsumeru.manager.views.Snackbar;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -528,8 +532,7 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
     private void fillData() {
         FXUtils.requestFocus(contentRoot);
         if (serie == null) {
-            ViewUtils.setNodeGone(contentEdit, spinnerLoading);
-            ViewUtils.setNodeVisible(contentSelect);
+            onFilesCleared();
         } else {
             ViewUtils.setNodeGone(contentSelect, spinnerLoading);
             ViewUtils.setNodeVisible(contentEdit);
@@ -653,8 +656,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbContentType,
                 overrideFields || currentContentType == ContentType.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getContentType())
-                            .map(Enum::toString)
-                            .orElse(ContentType.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(ContentType.UNKNOWN.name())
                         : currentContentType.name()
         );
 
@@ -665,8 +668,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbStatus,
                 overrideFields || currentStatus == Status.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getStatus())
-                            .map(Enum::toString)
-                            .orElse(Status.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(Status.UNKNOWN.name())
                         : currentStatus.name()
         );
 
@@ -677,8 +680,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbTransStatus,
                 overrideFields || currentTranslationStatus == TranslationStatus.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getMangaTranslationStatus())
-                            .map(Enum::toString)
-                            .orElse(TranslationStatus.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(TranslationStatus.UNKNOWN.name())
                         : currentTranslationStatus.name()
         );
 
@@ -689,8 +692,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbPlotType,
                 overrideFields || currentPlotType == PlotType.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getPlotType())
-                            .map(Enum::toString)
-                            .orElse(PlotType.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(PlotType.UNKNOWN.name())
                         : currentPlotType.name()
         );
 
@@ -701,8 +704,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbCensorship,
                 overrideFields || currentCensorship == Censorship.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getCensorship())
-                            .map(Enum::toString)
-                            .orElse(Censorship.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(Censorship.UNKNOWN.name())
                         : currentCensorship.name()
         );
 
@@ -713,8 +716,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                 cbColor,
                 overrideFields || currentColor == Color.UNKNOWN
                         ? Optional.ofNullable(item.getInfo().getColor())
-                            .map(Enum::toString)
-                            .orElse(Color.UNKNOWN.name())
+                        .map(Enum::toString)
+                        .orElse(Color.UNKNOWN.name())
                         : currentColor.name()
         );
 
@@ -1308,9 +1311,30 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
                         File firstFile = files.get(0);
 
                         if (isJsonMetadataFile(firstFile)) {
-                            File tempFile = createTempMetadataZipFile();
-                            ZipArchive.packSingleFile(firstFile, tempFile.getAbsolutePath());
-                            firstFile = tempFile;
+                            if (files.size() == 1) {
+                                File tempFile = createTempMetadataZipFile();
+                                ZipArchive.packSingleFile(firstFile, tempFile.getAbsolutePath());
+                                firstFile = tempFile;
+                            } else {
+                                String mergedFilePath = BookInfo.mergeMetadata(
+                                        files.stream()
+                                                .filter(this::isJsonMetadataFile)
+                                                .collect(Collectors.toList())
+                                );
+
+                                Snackbar.showSnackBar(
+                                        MainController.getSnackbarRoot(),
+                                        GUString.isNotEmpty(mergedFilePath)
+                                                ? String.format("%s (%s)", LocaleManager.getString("gui.dialog.saving_metadata.success"), mergedFilePath)
+                                                : LocaleManager.getString("gui.error.unable_to_read_metadata"),
+                                        GUString.isNotEmpty(mergedFilePath)
+                                                ? Snackbar.Type.SUCCESS
+                                                : Snackbar.Type.ERROR
+                                );
+
+                                onFilesCleared();
+                                return;
+                            }
                         }
 
                         try {
@@ -1329,6 +1353,8 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
 
     @Override
     public void onFilesCleared() {
+        ViewUtils.setNodeGone(contentEdit, spinnerLoading);
+        ViewUtils.setNodeVisible(contentSelect);
     }
 
     private String getTextInputLockButtonName(TextInputControl tic) {

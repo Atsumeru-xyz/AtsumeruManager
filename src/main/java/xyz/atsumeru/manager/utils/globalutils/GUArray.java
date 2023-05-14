@@ -49,11 +49,44 @@ public class GUArray {
         return !isEmpty(collectionMapArray);
     }
 
-    public static void sleepThread(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public static boolean mergeArraysWithoutDuplicates(List<String> dest, List<String> values) {
+        return mergeArraysWithoutDuplicates(values, dest, Integer.MAX_VALUE, Integer.MAX_VALUE, false);
+    }
+
+    public static boolean mergeArraysWithoutDuplicates(List<String> values, List<String> dest, int maxValueLength, int maxArraySize, boolean lowercase) {
+        if (GUArray.isEmpty(values)) {
+            return false;
         }
+        boolean merged = false;
+        for (String value : values) {
+            if (lowercase) {
+                value = value.toLowerCase();
+            }
+            if (addStringIntoArrayIfAbsent(value, dest, maxValueLength, maxArraySize, false)) {
+                merged = true;
+            }
+        }
+        return merged;
+    }
+
+    public static boolean addStringIntoArrayIfAbsent(String value, List<String> dest, int maxValueLength, int maxArraySize,  boolean lowercase) {
+        if (GUString.isEmpty(value) || value.length() > maxValueLength || dest.size() > maxArraySize || GUArray.containsIgnoreCase(dest, value)) {
+            return false;
+        }
+        if (lowercase) {
+            value = value.toLowerCase();
+        }
+        dest.add(value);
+        return true;
+    }
+
+    public static boolean containsIgnoreCase(Collection<String> collection, String value) {
+        for (String valueInCollection : collection) {
+            if (valueInCollection.equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

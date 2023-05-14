@@ -17,6 +17,7 @@ import xyz.atsumeru.manager.utils.globalutils.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,45 @@ public class BookInfo {
     public static final String ATSUMERU_ARCHIVE_HASH_TAG = "atsumeru";
     public static final String ATSUMERU_SERIE_HASH_TAG = "atsumeru-serie";
 
+    private static final String MERGED_BOOK_INFO_FILE_NAME = "merged_book_info.json";
+
     public static String generateSerieHash() {
         return GUString.getMHash2(ATSUMERU_SERIE_HASH_TAG, UUID.randomUUID().toString());
     }
 
     public static String generateArchiveHash() {
         return GUString.getMHash2(ATSUMERU_ARCHIVE_HASH_TAG, UUID.randomUUID().toString());
+    }
+
+    public static String mergeMetadata(List<File> files) {
+        try {
+            Serie mainSerie = new Serie();
+            BookInfo.fromJSON(mainSerie, GUString.join("\n", Files.readAllLines(files.get(0).toPath(), StandardCharsets.UTF_8)));
+
+            for (int i = 1; i < files.size(); i++) {
+                Serie tempSerie = new Serie();
+                BookInfo.fromJSON(tempSerie, GUString.join("\n", Files.readAllLines(files.get(i).toPath(), StandardCharsets.UTF_8)));
+
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getAuthors(), tempSerie.getAuthors());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getArtists(), tempSerie.getArtists());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getTranslators(), tempSerie.getTranslators());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getGenres(), tempSerie.getGenres());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getTags(), tempSerie.getTags());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getLanguages(), tempSerie.getLanguages());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getSeries(), tempSerie.getSeries());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getParodies(), tempSerie.getParodies());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getCircles(), tempSerie.getCircles());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getMagazines(), tempSerie.getMagazines());
+                GUArray.mergeArraysWithoutDuplicates(mainSerie.getCharacters(), tempSerie.getCharacters());
+            }
+
+            String mergedFilePath = new File(files.get(0).getParentFile(), MERGED_BOOK_INFO_FILE_NAME).toString();
+            saveToFile(mergedFilePath, BookInfo.toJSON(mainSerie));
+            return mergedFilePath;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     private static void saveToFile(String path, JSONObject obj) {
