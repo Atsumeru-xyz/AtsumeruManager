@@ -42,6 +42,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import kotlin.Pair;
 import lombok.Getter;
 import lombok.Setter;
@@ -942,7 +943,9 @@ public class ContentEditDialogController extends BaseDialogController<Serie> imp
             return null;
         };
 
-        textField.setTextFormatter(new TextFormatter<>(new FloatStringConverter(), defaultValue, integerFilter));
+        textField.setTextFormatter(allowDot
+                ? new TextFormatter<>(new FloatStringConverter(), defaultValue, integerFilter)
+                : new TextFormatter<>(new IntegerStringConverter(), (int) defaultValue, integerFilter));
     }
 
     private void setCheckBoxExcludeListeners(JFXCheckBox firstCB, JFXCheckBox secondCB) {
