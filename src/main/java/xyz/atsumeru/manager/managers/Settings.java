@@ -46,6 +46,10 @@ public class Settings {
         return GUType.getLongDef(properties.getProperty(key), def);
     }
 
+    public float getFloat(String key, float def) {
+        return GUType.getFloatDef(properties.getProperty(key), def);
+    }
+
     public void putString(String key, String value) {
         properties.setProperty(key, value);
     }
@@ -55,6 +59,10 @@ public class Settings {
     }
 
     public void putLong(String key, long value) {
+        properties.setProperty(key, String.valueOf(value));
+    }
+
+    public void putFloat(String key, float value) {
         properties.setProperty(key, String.valueOf(value));
     }
 
