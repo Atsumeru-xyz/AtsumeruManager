@@ -35,17 +35,6 @@ public class JavaHelper {
         return os.contains("nix") || os.contains("nux");
     }
 
-    public static boolean isAndroid() {
-        boolean isAndroid;
-        try {
-            Class.forName("android.app.Activity");
-            isAndroid = true;
-        } catch (ClassNotFoundException e) {
-            isAndroid = false;
-        }
-        return isAndroid;
-    }
-
     public static void setDebug(boolean debug) {
         DEBUG = debug;
     }

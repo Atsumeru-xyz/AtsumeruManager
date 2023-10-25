@@ -44,7 +44,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
@@ -82,10 +81,8 @@ public class FXApplication extends Application {
 
     public static boolean isNativeImage() {
         try {
-            Class<?> clazz = Class.forName("org.graalvm.nativeimage.ImageInfo");
-            Method method = clazz.getDeclaredMethod("inImageCode");
-            return (Boolean) method.invoke(clazz);
-        } catch (Exception e) {
+            return org.graalvm.nativeimage.ImageInfo.inImageCode();
+        } catch (Throwable ignored) {
             return false;
         }
     }
@@ -284,7 +281,7 @@ public class FXApplication extends Application {
                             }
                         }
                 )
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE))
                 .build();
     }
 }
